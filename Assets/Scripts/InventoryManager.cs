@@ -27,44 +27,89 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+	// Swap positions of two game objects
+	private void swapPos (GameObject a, GameObject b)
+	{
+		Vector3 tempPosition = a.transform.position;
+		a.transform.position = b.transform.position;
+		b.transform.position = tempPosition;
+
+	}
     // Removes item from inventory and puts it in camel
-    private void MoveItemToCamel(GameObject object_to_move)
+    private void MoveItemToCamel (GameObject objectToMove)
     {
-        if (currentCamelInventorySize >= camelInventory.Count)
-            return;
+		GameObject objectToMove2 = null;
 
-        inventory.Remove(object_to_move);
-        camelInventory.Add(object_to_move);
+		//find placeholder to swap with
+		foreach (GameObject item in camelInventory) {
+			if (item.tag == "placeholder") {
+				objectToMove2 = item;
+				break;
+			}
+		}
 
+		//if no placeholder dont add item
+		if (objectToMove2 == null)
+			return;
+
+		//move items
+		int object2Index = camelInventory.IndexOf (objectToMove2);
+		int object1Index = inventory.IndexOf (objectToMove);
+
+		inventory[object1Index] = objectToMove2;
+		camelInventory[object2Index] = objectToMove;
+
+		swapPos (objectToMove, objectToMove2);
+
+		currentInventorySize--;
+		currentCamelInventorySize++;
     }
 
     // Removes item from camel and puts it in inventory
     private void MoveItemToInventory(GameObject objectToMove)
     {
-        if (currentInventorySize >= inventory.Count)
-            return;
+		GameObject objectToMove2 = null;
 
-        camelInventory.Remove(objectToMove);
-        inventory.Add(objectToMove);
+		//find placeholder to swap with
+		foreach (GameObject item in inventory) {
+			if (item.tag == "placeholder") {
+				objectToMove2 = item;
+				break;
+			}
+		}
+
+		//if no placeholder dont add item
+		if (objectToMove2 == null)
+			return;
+
+		//move items
+		int object2Index = inventory.IndexOf (objectToMove2);
+		int object1Index = camelInventory.IndexOf (objectToMove);
+
+		inventory[object2Index] = objectToMove;
+		camelInventory[object1Index] = objectToMove2;
+
+		swapPos (objectToMove, objectToMove2);
 
 		currentInventorySize++;
+		currentCamelInventorySize--;
 
     }
 
 
-    public void ToggleInventory(GameObject object_to_move)
+    public void ToggleInventory (GameObject objectToMove)
     {
-        if (inventory.Contains(object_to_move))
+        if (inventory.Contains (objectToMove))
         {
-            MoveItemToCamel(object_to_move);
+            MoveItemToCamel (objectToMove);
         }
         else
         {
-            MoveItemToInventory(object_to_move);
+            MoveItemToInventory (objectToMove);
         }
     }
 
-	public void SellItems()
+	public void SellItems ()
 	{
 		camelMoving.StartMoving ();
 	}
