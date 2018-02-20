@@ -14,12 +14,14 @@ public class Moving : MonoBehaviour {
     LevelController levelController;
     AnimateChest chestAnimator;
     AudioSource camelAudio;
+    private Transform chestTransform;
 
 
     // Use this for initialization
     void Start () {
         camelAudio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        chestTransform = GameObject.FindWithTag("chest").transform;
         animator = GetComponent<Animator>();
         chestAnimator = GameObject.FindWithTag("chest_top").GetComponent<AnimateChest>();
         clickable = true;
@@ -39,14 +41,14 @@ public class Moving : MonoBehaviour {
             {
                 firstTime = true;
                 levelController.StartTimer();
-                startMoving();
+                StartMoving();
             }
 
             camelAudio.Play();
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
             clickable = false;
-            startMoving();
+            StartMoving();
             Debug.Log("Clicked");
         }
     }
@@ -66,13 +68,14 @@ public class Moving : MonoBehaviour {
     {
 
         //When camel reaches the collider, it stops
-        stopMoving();
+        StopMoving();
 
-        //Rotate the camel
+        //Rotate the camel and the chest
         rb.rotation = rb.rotation * Quaternion.Euler(0, 180, 0);
+        chestTransform.localRotation = chestTransform.localRotation * Quaternion.Euler(0, 180,0);
 
         //if camel hits the market
-        if(other.gameObject.name =="Market")
+        if (other.gameObject.name =="Market")
         {
             //Change the moving direction
             direction = Vector3.left;
@@ -89,20 +92,20 @@ public class Moving : MonoBehaviour {
 
     }
 
-    public void stopMoving()
+    public void StopMoving()
     {
         Debug.Log("Stopped");
         stopped = true;
-        rb.velocity = Vector3.zero;
         chestAnimator.SetAnimation(stopped);
+        rb.velocity = Vector3.zero;
         animator.SetBool("isWalking", false);
 
     }
-    public void startMoving()
+    public void StartMoving()
     {
         stopped = false;
-        rb.velocity = Vector3.zero;
         chestAnimator.SetAnimation(stopped);
+        rb.velocity = Vector3.zero;
         animator.SetBool("isWalking", true);
 
     }
