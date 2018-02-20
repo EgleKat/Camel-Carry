@@ -55,4 +55,11 @@ public class LevelController : MonoBehaviour {
         levelStart = true;
         levelStartTime = Time.time;
     }
+
+    public void AddCoins(int newCoins)
+    {
+        coinCount += newCoins;
+    }
 }
+
+
