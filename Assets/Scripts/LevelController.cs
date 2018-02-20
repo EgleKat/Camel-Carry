@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour {
     private bool levelStart;
     private float levelStartTime;
     public TextMeshProUGUI timerText;
-    private float levelLimitTime;
+    public float levelLimitTime;
     private GameObject camel;
     public int coinGoal;
     private int coinCount = 0;
@@ -19,7 +19,6 @@ public class LevelController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        levelLimitTime = 5;
         levelStart = false;
         coinText.text = coinCount + " / " + coinGoal;
     }
