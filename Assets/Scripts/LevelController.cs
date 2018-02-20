@@ -12,12 +12,16 @@ public class LevelController : MonoBehaviour {
     public TextMeshProUGUI timerText;
     private float levelLimitTime;
     private GameObject camel;
+    public int coinGoal;
+    private int coinCount = 0;
+    public TextMeshProUGUI coinText;
     
     // Use this for initialization
     void Start()
     {
         levelLimitTime = 5;
         levelStart = false;
+        coinText.text = coinCount + " / " + coinGoal;
     }
 
     // Update is called once per frame
@@ -51,4 +55,11 @@ public class LevelController : MonoBehaviour {
         levelStart = true;
         levelStartTime = Time.time;
     }
+
+    public void AddCoins(int newCoins)
+    {
+        coinCount += newCoins;
+    }
 }
+
+
