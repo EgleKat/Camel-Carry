@@ -12,14 +12,16 @@ public class Moving : MonoBehaviour {
     public bool firstTime;  //first time the camel moves, i.e. start timer then
     private bool stopped;
     LevelController levelController;
-    AudioSource audio;
+    AnimateChest chestAnimator;
+    AudioSource camelAudio;
 
 
     // Use this for initialization
     void Start () {
-        audio = GetComponent<AudioSource>();
+        camelAudio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        chestAnimator = GameObject.FindWithTag("chest_top").GetComponent<AnimateChest>();
         clickable = true;
         stopped = true;
         animator.SetBool("isWalking", false);
@@ -40,7 +42,7 @@ public class Moving : MonoBehaviour {
                 startMoving();
             }
 
-            audio.Play();
+            camelAudio.Play();
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
             clickable = false;
@@ -92,6 +94,7 @@ public class Moving : MonoBehaviour {
         Debug.Log("Stopped");
         stopped = true;
         rb.velocity = Vector3.zero;
+        chestAnimator.SetAnimation(stopped);
         animator.SetBool("isWalking", false);
 
     }
@@ -99,6 +102,8 @@ public class Moving : MonoBehaviour {
     {
         stopped = false;
         rb.velocity = Vector3.zero;
+        chestAnimator.SetAnimation(stopped);
         animator.SetBool("isWalking", true);
+
     }
 }
