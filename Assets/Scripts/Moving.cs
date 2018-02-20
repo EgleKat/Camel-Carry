@@ -44,6 +44,7 @@ public class Moving : MonoBehaviour {
                 StartMoving();
             }
 
+            camelAudio.time = 1;
             camelAudio.Play();
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
