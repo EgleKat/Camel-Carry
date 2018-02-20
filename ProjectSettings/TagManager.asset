@@ -8,6 +8,7 @@ TagManager:
   - chest_top
   - chest
   - chest_bottom
+  - inventory_manager
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,7 @@ public class Moving : MonoBehaviour {
     AnimateChest chestAnimator;
     AudioSource camelAudio;
     private Transform chestTransform;
+    private InventoryManager inventoryManager;
 
 
     // Use this for initialization
@@ -24,6 +25,8 @@ public class Moving : MonoBehaviour {
         chestTransform = GameObject.FindWithTag("chest").transform;
         animator = GetComponent<Animator>();
         chestAnimator = GameObject.FindWithTag("chest_top").GetComponent<AnimateChest>();
+        inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
+
         clickable = true;
         stopped = true;
         animator.SetBool("isWalking", false);
@@ -80,8 +83,8 @@ public class Moving : MonoBehaviour {
         {
             //Change the moving direction
             direction = Vector3.left;
-            //TODO send a message to inventory_manager
-
+            //Send a message to inventory_manager
+            inventoryManager.SellItems();
         }
         //if camel hits beginning marker
         else

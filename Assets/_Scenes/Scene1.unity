@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44435915, g: 0.4938239, b: 0.57317024, a: 1}
+  m_IndirectSpecularColor: {r: 0.44435918, g: 0.493824, b: 0.57317054, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6420,7 +6420,7 @@ GameObject:
   - component: {fileID: 1197714081}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: inventory_manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6512,7 +6512,7 @@ MonoBehaviour:
   - {fileID: 2095253898}
   - {fileID: 1612168861}
   - {fileID: 84902914}
-  camelMoving: {fileID: 0}
+  camelMoving: {fileID: 327739587}
 --- !u!1001 &1203040715
 Prefab:
   m_ObjectHideFlags: 0
