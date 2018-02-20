@@ -1866,7 +1866,7 @@ RectTransform:
   - {fileID: 679525489}
   - {fileID: 1809777112}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6444,7 +6444,7 @@ Transform:
   - {fileID: 1454494226}
   - {fileID: 1342491583}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 21.628, y: -83.588005, z: -61.295002}
 --- !u!65 &1310661730
 BoxCollider:
