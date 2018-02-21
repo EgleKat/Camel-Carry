@@ -14,13 +14,19 @@ public class Moving : MonoBehaviour {
     LevelController levelController;
     AnimateChest chestAnimator;
     AudioSource camelAudio;
+    AudioSource walkingAudio;
+    AudioSource standingAudio;
     private Transform chestTransform;
     private InventoryManager inventoryManager;
+    
 
 
     // Use this for initialization
     void Start () {
-        camelAudio = GetComponent<AudioSource>();
+        camelAudio = GetComponents<AudioSource>()[1];
+        walkingAudio = GetComponents<AudioSource>()[0];
+        standingAudio = GetComponents<AudioSource>()[2];
+
         rb = GetComponent<Rigidbody>();
         chestTransform = GameObject.FindWithTag("chest").transform;
         animator = GetComponent<Animator>();
@@ -32,7 +38,7 @@ public class Moving : MonoBehaviour {
         stopped = true;
         firstTime = false;
         animator.SetBool("isWalking", false);
-
+        standingAudio.Play();
 
     }
 
@@ -40,6 +46,8 @@ public class Moving : MonoBehaviour {
     {
         if (clickable)
         {
+            standingAudio.Stop();
+            walkingAudio.Play();
             if (!firstTime)
             {
                 firstTime = true;
@@ -52,6 +60,7 @@ public class Moving : MonoBehaviour {
             camelAudio.Play();
 
             clickable = false;
+
             //start the animation
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
@@ -93,6 +102,8 @@ public class Moving : MonoBehaviour {
         {
             //let the user click the camel
             clickable = true;
+            walkingAudio.Stop();
+            standingAudio.Play();
        
         }
 

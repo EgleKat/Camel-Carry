@@ -16,8 +16,12 @@ public class IntroScene : MonoBehaviour {
 	}
 
 
-    public void NextScene()
+    public void LoadFirstScene()
     {
         SceneManager.LoadScene("Scene1");
+    }
+    public void NextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
