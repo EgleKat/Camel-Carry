@@ -11,6 +11,8 @@ TagManager:
   - placeholder
   - inventory_manager
   - level_notification
+  - win_message
+  - loose_message
   layers:
   - Default
   - TransparentFX

@@ -151,4 +151,10 @@ public class Moving : MonoBehaviour {
     {
         clickable = value;
     }
+    public void TurnAllMusicOff()
+    {
+        walkingAudio.Stop();
+        standingAudio.Stop();
+
+    }
 }

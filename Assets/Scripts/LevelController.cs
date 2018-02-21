@@ -98,9 +98,11 @@ public class LevelController : MonoBehaviour {
     //called either when time is finished or when all the items are sold
     public void LevelFinished()
     {
+        Moving camelMoving = camel.GetComponent<Moving>();
         //Don't let the user click the camel and stop the camel from moving
-        camel.GetComponent<Moving>().SetClickable(false);
-        camel.GetComponent<Moving>().StopMoving(false);
+        camelMoving.SetClickable(false);
+        camelMoving.StopMoving(false);
+        camelMoving.TurnAllMusicOff();
 
         //TODO inventory set not interactable
 
@@ -119,6 +121,7 @@ public class LevelController : MonoBehaviour {
     private void DisplayLooseMessage()
     {
         looseMessage.SetActive(true);
+        
     }
 
     private void DisplayWinMessage()
