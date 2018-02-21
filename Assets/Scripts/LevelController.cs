@@ -17,12 +17,20 @@ public class LevelController : MonoBehaviour {
     private int coinCount = 0;
     public TextMeshProUGUI coinText;
     private int weight;
-    
+    private GameObject winMessage;
+    private GameObject looseMessage;
+
     // Use this for initialization
     void Start()
     {
         levelStart = false;
         setCoinDisplay();
+        camel = GameObject.FindGameObjectWithTag("Camel");
+        winMessage = GameObject.FindWithTag("win_message");
+        winMessage.SetActive(false);
+
+        looseMessage = GameObject.FindWithTag("loose_message");
+        looseMessage.SetActive(false);
 
         float t = levelLimitTime;
         string minutes = Mathf.Floor(t / 60).ToString("00");
@@ -54,6 +62,7 @@ public class LevelController : MonoBehaviour {
             if (t >= levelLimitTime)
             {
                 levelStart = false;
+                LevelFinished();
                 timerText.text = "00:00";
                 
             }
@@ -85,6 +94,37 @@ public class LevelController : MonoBehaviour {
     public int GetWeight()
     {
         return this.weight;
+    }
+    //called either when time is finished or when all the items are sold
+    public void LevelFinished()
+    {
+        //Don't let the user click the camel and stop the camel from moving
+        camel.GetComponent<Moving>().SetClickable(false);
+        camel.GetComponent<Moving>().StopMoving(false);
+
+        //TODO inventory set not interactable
+
+        //check if coin goal is met
+        if (coinCount>=coinGoal)
+        {
+            DisplayWinMessage();
+        }
+        else
+        {
+            DisplayLooseMessage();
+        }
+
+    }
+
+    private void DisplayLooseMessage()
+    {
+        looseMessage.SetActive(true);
+    }
+
+    private void DisplayWinMessage()
+    {
+        winMessage.SetActive(true);
+
     }
 }
 

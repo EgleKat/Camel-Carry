@@ -18,6 +18,7 @@ public class Moving : MonoBehaviour {
     AudioSource standingAudio;
     private Transform chestTransform;
     private InventoryManager inventoryManager;
+    //int secondsToFade = 6;
     
 
 
@@ -77,13 +78,21 @@ public class Moving : MonoBehaviour {
         {
             rb.velocity = direction * Time.deltaTime * speedMultiplier;
         }
+     //   if (walkingAudio.volume < 0.7)
+     //   {
+     //     walkingAudio.volume = walkingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
+     //     standingAudio.volume = standingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
+     //
+     //   }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
         //When camel reaches the collider, it stops
-        StopMoving();
+        StopMoving(true);
 
         //Rotate the camel and the chest
         rb.rotation = rb.rotation * Quaternion.Euler(0, 180, 0);
@@ -109,10 +118,10 @@ public class Moving : MonoBehaviour {
 
     }
 
-    public void StopMoving()
+    public void StopMoving(bool animateChest)
     {
-        Debug.Log("Stopped");
         stopped = true;
+        if(animateChest)
         chestAnimator.SetAnimation(stopped);
         rb.velocity = Vector3.zero;
         animator.SetBool("isWalking", false);
@@ -136,5 +145,10 @@ public class Moving : MonoBehaviour {
         }
         speedMultiplier -= weight*2;
         animator.speed = speedMultiplier * 0.01f;
+    }
+
+    public void SetClickable(bool value)
+    {
+        clickable = value;
     }
 }
