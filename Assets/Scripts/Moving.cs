@@ -15,6 +15,7 @@ public class Moving : MonoBehaviour {
     AnimateChest chestAnimator;
     AudioSource camelAudio;
     private Transform chestTransform;
+    private InventoryManager inventoryManager;
 
 
     // Use this for initialization
@@ -24,17 +25,19 @@ public class Moving : MonoBehaviour {
         chestTransform = GameObject.FindWithTag("chest").transform;
         animator = GetComponent<Animator>();
         chestAnimator = GameObject.FindWithTag("chest_top").GetComponent<AnimateChest>();
+        inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
+        levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
+
         clickable = true;
         stopped = true;
-        animator.SetBool("isWalking", false);
         firstTime = false;
-        levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
+        animator.SetBool("isWalking", false);
+
 
     }
 
     void OnMouseDown()
     {
-        Debug.Log("Mouse Down");
         if (clickable)
         {
             if (!firstTime)
@@ -44,12 +47,15 @@ public class Moving : MonoBehaviour {
                 StartMoving();
             }
 
+            //start playing audio from 1 second
+            camelAudio.time = 1;
             camelAudio.Play();
+
+            clickable = false;
+            //start the animation
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
-            clickable = false;
             StartMoving();
-            Debug.Log("Clicked");
         }
     }
 
@@ -79,8 +85,8 @@ public class Moving : MonoBehaviour {
         {
             //Change the moving direction
             direction = Vector3.left;
-            //TODO send a message to inventory_manager
-
+            //Send a message to inventory_manager
+            inventoryManager.SellItems();
         }
         //if camel hits beginning marker
         else
@@ -103,10 +109,21 @@ public class Moving : MonoBehaviour {
     }
     public void StartMoving()
     {
+        changeSpeed();
         stopped = false;
         chestAnimator.SetAnimation(stopped);
-        rb.velocity = Vector3.zero;
+        rb.velocity = Vector3.zero; //need this here so that speed isn't skewed by Time.delta
         animator.SetBool("isWalking", true);
 
+    }
+    private void changeSpeed()
+    {
+        int weight = levelController.GetWeight();
+        if (weight == 0)
+        {
+            speedMultiplier = 100;
+        }
+        speedMultiplier -= weight*2;
+        animator.speed = speedMultiplier * 0.01f;
     }
 }
