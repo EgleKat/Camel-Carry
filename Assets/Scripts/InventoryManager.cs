@@ -12,6 +12,8 @@ public class InventoryManager : MonoBehaviour
 	private int currentCamelInventorySize;
 
 	public Moving camelMoving;
+    LevelController levelController;
+
 
 
     // Use this for initialization
@@ -19,6 +21,8 @@ public class InventoryManager : MonoBehaviour
     {
 		currentCamelInventorySize = 0;
 		currentInventorySize = inventory.Count;
+        levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
+        levelController.SetWeight(0);   //set the weight to 0
     }
 
     // Update is called once per frame
@@ -26,7 +30,7 @@ public class InventoryManager : MonoBehaviour
     {
 
     }
-
+    //TODO - whenever an item is added/removed from the box -call levelController.setWeight()
     // Removes item from inventory and puts it in camel
     private void MoveItemToCamel(GameObject object_to_move)
     {
@@ -66,6 +70,10 @@ public class InventoryManager : MonoBehaviour
 
 	public void SellItems()
 	{
-		camelMoving.StartMoving ();
+        //TODO change the 0 to the weight value, and coin value
+        levelController.SetWeight(0);   //set the weight to 0
+        levelController.AddCoins(50);
+        camelMoving.StartMoving ();     //let camel move back
 	}
+
 }

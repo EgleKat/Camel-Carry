@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour {
     public int coinGoal;
     private int coinCount = 0;
     public TextMeshProUGUI coinText;
+    private int weight;
     
     // Use this for initialization
     void Start()
@@ -58,6 +59,15 @@ public class LevelController : MonoBehaviour {
     public void AddCoins(int newCoins)
     {
         coinCount += newCoins;
+    }
+
+    public void SetWeight(int weight)
+    { 
+        this.weight = weight;
+    }
+    public int GetWeight()
+    {
+        return this.weight;
     }
 }
 
