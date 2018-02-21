@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AnimateChest : MonoBehaviour {
 
-    Animator animator; 
+    Animator animator;
+    AudioSource audioChest;
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
+        audioChest = GetComponent<AudioSource>();
         animator.SetBool("camelStopped", true);
 	}
 
@@ -16,7 +18,10 @@ public class AnimateChest : MonoBehaviour {
         animator.SetBool("camelStopped", stopped);
 
     }
-
+    public void playAudio()
+    {
+        audioChest.Play();
+    }
 
 
 }
