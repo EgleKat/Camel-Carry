@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
 
 	private int currentInventorySize;
 	private int currentCamelInventorySize;
+	private bool canSwap;
 
 	public Moving camelMoving;
     LevelController levelController;
@@ -23,6 +24,7 @@ public class InventoryManager : MonoBehaviour
 		currentInventorySize = inventory.Count;
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
         levelController.SetWeight(20);   //set the weight to 0
+		canSwap = false;
     }
 
     // Update is called once per frame
@@ -106,6 +108,9 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory (GameObject objectToMove)
     {
+		if (canSwap)
+			return;
+		
         if (inventory.Contains (objectToMove))
         {
             MoveItemToCamel (objectToMove);
@@ -119,9 +124,14 @@ public class InventoryManager : MonoBehaviour
 	public void SellItems ()
 	{
         //TODO change the 0 to the weight value, and coin value
+		//TODO call level controller to finish level if all items are sold
         levelController.SetWeight(0);   //set the weight to 0
         levelController.AddCoins(50);
         camelMoving.StartMoving ();     //let camel move back
 	}
 
+	public void ToggleSwapping ()
+	{
+		canSwap = !canSwap;
+	}
 }

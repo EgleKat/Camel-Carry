@@ -52,6 +52,8 @@ public class Moving : MonoBehaviour {
             camelAudio.Play();
 
             clickable = false;
+			inventoryManager.ToggleSwapping ();
+
             //start the animation
             animator.SetBool("isWalking", true);
             direction  = Vector3.right;
@@ -93,7 +95,8 @@ public class Moving : MonoBehaviour {
         {
             //let the user click the camel
             clickable = true;
-       
+			inventoryManager.ToggleSwapping ();
+       		
         }
 
     }
