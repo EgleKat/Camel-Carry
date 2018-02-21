@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
 		currentCamelInventorySize = 0;
 		currentInventorySize = inventory.Count;
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
-        levelController.SetWeight(0);   //set the weight to 0
+        levelController.SetWeight(20);   //set the weight to 0
     }
 
     // Update is called once per frame
