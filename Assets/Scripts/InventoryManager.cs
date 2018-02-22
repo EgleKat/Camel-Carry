@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
 	private int currentCamelInventorySize;
 	private bool canSwap;
 
-	public Moving camelMoving;
+	private Moving camelMoving;
     LevelController levelController;
 
 
@@ -20,10 +20,12 @@ public class InventoryManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
+
 		currentCamelInventorySize = 0;
 		currentInventorySize = inventory.Count;
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
-        levelController.SetWeight(20);   //set the weight to 0
+        levelController.SetWeight(0);   //set the weight to 0
 		canSwap = false;
     }
 
