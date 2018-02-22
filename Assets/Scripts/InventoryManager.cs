@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
 
     public List<GameObject> inventory;
     public List<GameObject> camelInventory;
+
+    public Transform placeholder;
 
 	private int currentInventorySize;
 	private int currentCamelInventorySize;
@@ -15,11 +18,18 @@ public class InventoryManager : MonoBehaviour
 	private Moving camelMoving;
     LevelController levelController;
 
-
-
     // Use this for initialization
     void Start()
     {
+        //TODO: set price and weight based on item
+        foreach (GameObject item in inventory)
+        {
+            ItemValues iv = item.GetComponent<ItemValues>();
+            iv.SetPrice(500);
+            iv.SetWeight(10);
+
+        }
+
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
 
 		currentCamelInventorySize = 0;
@@ -37,7 +47,7 @@ public class InventoryManager : MonoBehaviour
 
 
 	// Swap positions of two game objects
-	private void swapPos (GameObject a, GameObject b)
+	private void SwapPos (GameObject a, GameObject b)
 	{
 		Vector3 tempPosition = a.transform.position;
 		a.transform.position = b.transform.position;
@@ -70,7 +80,7 @@ public class InventoryManager : MonoBehaviour
 		inventory[object1Index] = objectToMove2;
 		camelInventory[object2Index] = objectToMove;
 
-		swapPos (objectToMove, objectToMove2);
+		SwapPos (objectToMove, objectToMove2);
 
 		currentInventorySize--;
 		currentCamelInventorySize++;
@@ -100,7 +110,7 @@ public class InventoryManager : MonoBehaviour
 		inventory[object2Index] = objectToMove;
 		camelInventory[object1Index] = objectToMove2;
 
-		swapPos (objectToMove, objectToMove2);
+		SwapPos (objectToMove, objectToMove2);
 
 		currentInventorySize++;
 		currentCamelInventorySize--;
@@ -127,10 +137,28 @@ public class InventoryManager : MonoBehaviour
 	{
         //TODO change the 0 to the weight value, and coin value
 		//TODO call level controller to finish level if all items are sold
+
+		int totalItemValue = 0;
+        for (int i = 0; i < camelInventory.Count - 1; i++)
+        {
+            GameObject item = camelInventory[i];
+
+            if (item.tag == "placeholder")
+                continue;
+
+            totalItemValue += item.GetComponent<ItemValues>().GetPrice ();
+
+            camelInventory[i] = Instantiate(placeholder, item.GetComponent<RectTransform>()).gameObject;
+
+            item.SetActive(false);
+        }
+
+        Debug.Log(totalItemValue);
+        levelController.AddCoins(totalItemValue);
+
         levelController.SetWeight(0);   //set the weight to 0
-        levelController.AddCoins(50);
-        camelMoving.StartMoving ();     //let camel move back
-	}
+        camelMoving.StartMoving();     //let camel move back
+    }
 
 	public void ToggleSwapping ()
 	{

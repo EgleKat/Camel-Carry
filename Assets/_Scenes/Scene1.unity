@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 48688930}
   - component: {fileID: 48688929}
   - component: {fileID: 48688932}
+  - component: {fileID: 48688933}
   m_Layer: 5
   m_Name: Sword
   m_TagString: Untagged
@@ -654,6 +655,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &48688933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 48688927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51551399
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +943,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 17.8
-  m_fontSizeBase: 20
+  m_fontSizeBase: 17.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 5
@@ -1167,6 +1179,7 @@ GameObject:
   - component: {fileID: 78222252}
   - component: {fileID: 78222251}
   - component: {fileID: 78222254}
+  - component: {fileID: 78222255}
   m_Layer: 5
   m_Name: Ice Cube
   m_TagString: Untagged
@@ -1327,6 +1340,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &78222255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78222249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &84902912
 Prefab:
   m_ObjectHideFlags: 0
@@ -1372,7 +1396,7 @@ Prefab:
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
@@ -1545,15 +1569,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 112757844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00004529953}
-  m_LocalScale: {x: 0.99998415, y: 0.9999849, z: 0.9999849}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00006818771}
+  m_LocalScale: {x: 0.99998415, y: 0.99998534, z: 0.99998534}
   m_Children: []
-  m_Father: {fileID: 1197714078}
-  m_RootOrder: 15
+  m_Father: {fileID: 520233004}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 127.7, y: 9.057035}
+  m_AnchoredPosition: {x: -35.831985, y: -24.699987}
   m_SizeDelta: {x: 84.8, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &112757846
@@ -2075,7 +2099,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2399,6 +2423,7 @@ GameObject:
   - component: {fileID: 235977918}
   - component: {fileID: 235977917}
   - component: {fileID: 235977920}
+  - component: {fileID: 235977921}
   m_Layer: 5
   m_Name: Umbrella
   m_TagString: Untagged
@@ -2560,6 +2585,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &235977921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235977915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &246917095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,6 +4578,7 @@ GameObject:
   - component: {fileID: 520233007}
   - component: {fileID: 520233006}
   - component: {fileID: 520233005}
+  - component: {fileID: 520233009}
   m_Layer: 5
   m_Name: Flip-Flops
   m_TagString: Untagged
@@ -4562,6 +4599,7 @@ RectTransform:
   - {fileID: 1896023484}
   - {fileID: 1126770239}
   - {fileID: 1532016872}
+  - {fileID: 112757845}
   m_Father: {fileID: 1197714078}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4702,6 +4740,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 520233003}
+--- !u!114 &520233009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 520233003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &521147767
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,6 +5118,7 @@ GameObject:
   - component: {fileID: 587381101}
   - component: {fileID: 587381100}
   - component: {fileID: 587381103}
+  - component: {fileID: 587381104}
   m_Layer: 5
   m_Name: Ice Cream
   m_TagString: Untagged
@@ -5230,6 +5280,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &587381104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 587381098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &593317545
 GameObject:
   m_ObjectHideFlags: 0
@@ -8183,7 +8244,6 @@ RectTransform:
   - {fileID: 84902913}
   - {fileID: 593317546}
   - {fileID: 1809777112}
-  - {fileID: 112757845}
   m_Father: {fileID: 250540220}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8248,6 +8308,8 @@ MonoBehaviour:
   - {fileID: 2095253898}
   - {fileID: 1612168861}
   - {fileID: 84902914}
+  placeholder: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
+    type: 2}
 --- !u!1001 &1203040715
 Prefab:
   m_ObjectHideFlags: 0
@@ -9848,7 +9910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.9, y: 2.5299966}
+  m_AnchoredPosition: {x: 1.72, y: 2.5299966}
   m_SizeDelta: {x: 89.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532016873
@@ -10132,7 +10194,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 17.8
-  m_fontSizeBase: 20
+  m_fontSizeBase: 17.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 5
@@ -10321,7 +10383,7 @@ Prefab:
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
@@ -10376,18 +10438,6 @@ Prefab:
     - target: {fileID: 1588514856796610, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
       propertyPath: m_Name
       value: Placeholder (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588514856796610, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_TagString
-      value: placeholder
-      objectReference: {fileID: 0}
-    - target: {fileID: 1640928954196232, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588514856796610, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
@@ -11726,7 +11776,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -12539,7 +12589,7 @@ Prefab:
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 224935758709379418, guid: 57bb9bc919759124abea850ac1d298c4,
         type: 2}
@@ -12595,18 +12645,6 @@ Prefab:
       propertyPath: m_Name
       value: Placeholder (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1588514856796610, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_TagString
-      value: placeholder
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588514856796610, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1640928954196232, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57bb9bc919759124abea850ac1d298c4, type: 2}
   m_IsPrefabParent: 0
@@ -12632,6 +12670,7 @@ GameObject:
   - component: {fileID: 2104054730}
   - component: {fileID: 2104054729}
   - component: {fileID: 2104054732}
+  - component: {fileID: 2104054733}
   m_Layer: 5
   m_Name: Bottle
   m_TagString: Untagged
@@ -12793,6 +12832,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &2104054733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104054727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc9cf42871d4f42a0c061ceeb37857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2118263469
 GameObject:
   m_ObjectHideFlags: 0
