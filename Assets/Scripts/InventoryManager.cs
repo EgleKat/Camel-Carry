@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> inventory;
     public List<GameObject> camelInventory;
 
-    public Transform placeholder;
+    public GameObject placeholder;
 
 	private int currentInventorySize;
 	private int currentCamelInventorySize;
@@ -24,9 +24,12 @@ public class InventoryManager : MonoBehaviour
         //TODO: set price and weight based on item
         foreach (GameObject item in inventory)
         {
+            Debug.Log(item.name);
+
             ItemValues iv = item.GetComponent<ItemValues>();
+               
             iv.SetPrice(500);
-            iv.SetWeight(10);
+            iv.SetWeight(20);
 
         }
 
@@ -148,8 +151,12 @@ public class InventoryManager : MonoBehaviour
 
             totalItemValue += item.GetComponent<ItemValues>().GetPrice ();
 
-            camelInventory[i] = Instantiate(placeholder, item.GetComponent<RectTransform>()).gameObject;
+            Debug.Log(item.name);
+            Debug.Log(item.transform.localPosition);
+            GameObject newPlaceholder = Instantiate(placeholder, new Vector3(0,0,0), item.transform.rotation, gameObject.transform) as GameObject;
 
+            SwapPos(newPlaceholder, item);
+            camelInventory[i] = newPlaceholder;
             item.SetActive(false);
         }
 

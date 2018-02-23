@@ -26,6 +26,7 @@ public class ItemValues : MonoBehaviour {
     {
         priceVal = priceToSet;
         price.text = priceToSet.ToString ();
+        Debug.Log("Set Price");
 
     }
 
@@ -38,6 +39,7 @@ public class ItemValues : MonoBehaviour {
     {
         weightVal = weightToSet;
         weight.text = weightToSet.ToString();
+        Debug.Log("Set Weight");
 
     }
 
