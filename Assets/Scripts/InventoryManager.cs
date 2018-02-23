@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour
 	private int currentCamelInventorySize;
 	private bool canSwap;
 
+    private int currentCamelInventoryWeight;
+
 	private Moving camelMoving;
     LevelController levelController;
 
@@ -33,13 +35,14 @@ public class InventoryManager : MonoBehaviour
 
         }
 
+        currentCamelInventoryWeight = 0;
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
 
 		currentCamelInventorySize = 0;
 		currentInventorySize = inventory.Count;
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
         levelController.SetWeight(0);   //set the weight to 0
-		canSwap = false;
+		canSwap = true;
     }
 
     // Update is called once per frame
@@ -76,15 +79,22 @@ public class InventoryManager : MonoBehaviour
 		if (objectToMove2 == null)
 			return;
 
-		//move items
+		//get location of each object
 		int object2Index = camelInventory.IndexOf (objectToMove2);
 		int object1Index = inventory.IndexOf (objectToMove);
 
+        //swap inventories of items
 		inventory[object1Index] = objectToMove2;
 		camelInventory[object2Index] = objectToMove;
 
 		SwapPos (objectToMove, objectToMove2);
 
+        //update camel weight
+        currentCamelInventoryWeight += objectToMove.GetComponent<ItemValues>().GetWeight();
+        levelController.SetWeight(currentCamelInventoryWeight);
+
+        Debug.Log(levelController.GetWeight());
+        //TODO: Remove
 		currentInventorySize--;
 		currentCamelInventorySize++;
     }
@@ -115,7 +125,13 @@ public class InventoryManager : MonoBehaviour
 
 		SwapPos (objectToMove, objectToMove2);
 
-		currentInventorySize++;
+        //update camel weight
+        currentCamelInventoryWeight -= objectToMove.GetComponent<ItemValues>().GetWeight();
+        levelController.SetWeight(currentCamelInventoryWeight);
+
+        Debug.Log(levelController.GetWeight());
+        //TODO: remove
+        currentInventorySize++;
 		currentCamelInventorySize--;
 
     }
@@ -123,9 +139,11 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory (GameObject objectToMove)
     {
-		if (canSwap)
+        //check if items can be exchanged between invenotries
+		if (!canSwap)
 			return;
 		
+        //check where item is and move to other inventory
         if (inventory.Contains (objectToMove))
         {
             MoveItemToCamel (objectToMove);
@@ -138,30 +156,41 @@ public class InventoryManager : MonoBehaviour
 
 	public void SellItems ()
 	{
-        //TODO change the 0 to the weight value, and coin value
-		//TODO call level controller to finish level if all items are sold
-
+       
 		int totalItemValue = 0;
+        //loop through all items in camels inventory
         for (int i = 0; i < camelInventory.Count - 1; i++)
         {
             GameObject item = camelInventory[i];
 
+            //if its a placeholder skip
             if (item.tag == "placeholder")
                 continue;
 
+            //add items price to total
             totalItemValue += item.GetComponent<ItemValues>().GetPrice ();
 
-            Debug.Log(item.name);
-            Debug.Log(item.transform.localPosition);
+            //create new placeholder
             GameObject newPlaceholder = Instantiate(placeholder, new Vector3(0,0,0), item.transform.rotation, gameObject.transform) as GameObject;
 
+            //position place holder where item used to be on camel
             SwapPos(newPlaceholder, item);
+
+            //replace item with placeholder
             camelInventory[i] = newPlaceholder;
+
+            //make item invisible and uninteractable
             item.SetActive(false);
         }
 
         Debug.Log(totalItemValue);
         levelController.AddCoins(totalItemValue);
+
+        //finish level
+        if(inventory.Count == 0)
+        {
+            levelController.LevelFinished();
+        }
 
         levelController.SetWeight(0);   //set the weight to 0
         camelMoving.StartMoving();     //let camel move back
@@ -171,4 +200,9 @@ public class InventoryManager : MonoBehaviour
 	{
 		canSwap = !canSwap;
 	}
+
+    public void SetSwap(bool swap)
+    {
+        canSwap = swap;
+    }
 }

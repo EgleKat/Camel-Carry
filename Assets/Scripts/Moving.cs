@@ -145,6 +145,11 @@ public class Moving : MonoBehaviour {
             speedMultiplier = 100;
         }
         speedMultiplier -= weight*2;
+
+        //Speed can only be 0 or greater than 0
+        if (speedMultiplier < 0)
+            speedMultiplier = 0;
+
         animator.speed = speedMultiplier * 0.01f;
     }
 

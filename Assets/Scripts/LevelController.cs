@@ -19,12 +19,15 @@ public class LevelController : MonoBehaviour {
     private int weight;
     private GameObject winMessage;
     private GameObject looseMessage;
+    private InventoryManager inventoryManager;
 
     // Use this for initialization
     void Start()
     {
         levelStart = false;
         setCoinDisplay();
+
+        inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         camel = GameObject.FindGameObjectWithTag("Camel");
         winMessage = GameObject.FindWithTag("win_message");
         winMessage.SetActive(false);
@@ -104,7 +107,8 @@ public class LevelController : MonoBehaviour {
         camelMoving.StopMoving(false);
         camelMoving.TurnAllMusicOff();
 
-        //TODO inventory set not interactable
+        //Inventory is uninteractable when level finished
+        inventoryManager.SetSwap(false);
 
         //check if coin goal is met
         if (coinCount>=coinGoal)
