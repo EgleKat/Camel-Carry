@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject placeholder;
 
+    public int maxWeight;
+
 	private int currentInventorySize;
 	private int currentCamelInventorySize;
 	private bool canSwap;
@@ -36,7 +38,7 @@ public class InventoryManager : MonoBehaviour
             ItemValues iv = item.GetComponent<ItemValues>();
                
             iv.SetPrice(500);
-            iv.SetWeight(20);
+            iv.SetWeight(10);
 
         }
 
@@ -72,6 +74,15 @@ public class InventoryManager : MonoBehaviour
     {
 		GameObject objectToMove2 = null;
 
+        int objectWeight = objectToMove.GetComponent<ItemValues>().GetWeight();
+
+        //if object would break the camels back don't allow adding
+        //TODO: Highlight weight when user attemps this
+        Debug.Log(currentCamelInventoryWeight + " " + objectWeight);
+        if (currentCamelInventoryWeight + objectWeight >= maxWeight)
+            return;
+
+        Debug.Log("under weight");
 		//find placeholder to swap with
 		foreach (GameObject item in camelInventory) {
 			if (item.tag == "placeholder") {
@@ -210,5 +221,10 @@ public class InventoryManager : MonoBehaviour
     public void SetSwap(bool swap)
     {
         canSwap = swap;
+    }
+
+    public int GetMaxWeight()
+    {
+        return maxWeight;
     }
 }
