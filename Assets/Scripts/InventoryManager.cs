@@ -20,6 +20,11 @@ public class InventoryManager : MonoBehaviour
 	private Moving camelMoving;
     LevelController levelController;
 
+    //TODO: Add max weight text next to inventory
+    //TODO: Coin audio when selling
+    //TODO: Dont allow Items to be put on if greater than max weight
+    //TODO: Add hot items, give cold and hot items attributes, cant be put next to each other
+
     // Use this for initialization
     void Start()
     {
@@ -192,6 +197,7 @@ public class InventoryManager : MonoBehaviour
             levelController.LevelFinished();
         }
 
+        currentCamelInventoryWeight = 0;
         levelController.SetWeight(0);   //set the weight to 0
         camelMoving.StartMoving();     //let camel move back
     }

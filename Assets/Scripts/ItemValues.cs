@@ -12,9 +12,9 @@ public class ItemValues : MonoBehaviour {
     private int weightVal;
 
     // Use this for initialization
-    void Start () {
-        price = gameObject.transform.Find ("Price").gameObject.GetComponent<TextMeshProUGUI> ();
-        weight = gameObject.transform.Find ("Weight").gameObject.GetComponent <TextMeshProUGUI> ();
+    void Awake () {
+        price = transform.Find ("Price").gameObject.GetComponent<TextMeshProUGUI> ();
+        weight = transform.Find ("Weight").gameObject.GetComponent <TextMeshProUGUI> ();
 	}
 	
 	// Update is called once per frame

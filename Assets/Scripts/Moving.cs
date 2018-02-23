@@ -53,7 +53,9 @@ public class Moving : MonoBehaviour {
             {
                 firstTime = true;
                 levelController.StartTimer();
-                StartMoving();
+                Debug.Log("hello");
+                Debug.Log("Direction: " + direction);
+               // StartMoving();
             }
 
             //start playing audio from 1 second
@@ -65,8 +67,8 @@ public class Moving : MonoBehaviour {
 
             //start the animation
             animator.SetBool("isWalking", true);
-            direction  = Vector3.right;
             StartMoving();
+            direction = Vector3.right;
         }
     }
 
@@ -140,6 +142,7 @@ public class Moving : MonoBehaviour {
     private void changeSpeed()
     {
         int weight = levelController.GetWeight();
+        Debug.Log(weight);
         if (weight == 0)
         {
             speedMultiplier = 100;
@@ -150,6 +153,7 @@ public class Moving : MonoBehaviour {
         if (speedMultiplier < 0)
             speedMultiplier = 0;
 
+        Debug.Log("speedmult" + speedMultiplier);
         animator.speed = speedMultiplier * 0.01f;
     }
 
