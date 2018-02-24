@@ -18,13 +18,12 @@ public class InventoryManager : MonoBehaviour
 	private bool canSwap;
 
     private int currentCamelInventoryWeight;
+    private TextMeshProUGUI MaxWeightText;
 
 	private Moving camelMoving;
     LevelController levelController;
 
-    //TODO: Add max weight text next to inventory
     //TODO: Coin audio when selling
-    //TODO: Dont allow Items to be put on if greater than max weight
     //TODO: Add hot items, give cold and hot items attributes, cant be put next to each other
 
     // Use this for initialization
@@ -41,6 +40,8 @@ public class InventoryManager : MonoBehaviour
             iv.SetWeight(10);
 
         }
+        MaxWeightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
+        MaxWeightText.text = "0";
 
         currentCamelInventoryWeight = 0;
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
@@ -77,10 +78,13 @@ public class InventoryManager : MonoBehaviour
         int objectWeight = objectToMove.GetComponent<ItemValues>().GetWeight();
 
         //if object would break the camels back don't allow adding
-        //TODO: Highlight weight when user attemps this
         Debug.Log(currentCamelInventoryWeight + " " + objectWeight);
-        if (currentCamelInventoryWeight + objectWeight >= maxWeight)
+        if (currentCamelInventoryWeight + objectWeight > maxWeight)
+        {
+            //flash max weight red
+            StartCoroutine(GameObject.Find("MaxWeightBorder").GetComponent<FlashBorder>().FlashBorderRed());
             return;
+        }
 
         Debug.Log("under weight");
 		//find placeholder to swap with
@@ -91,10 +95,13 @@ public class InventoryManager : MonoBehaviour
 			}
 		}
 
-		//if no placeholder dont add item
-		if (objectToMove2 == null)
-			return;
-
+        //if no placeholder dont add item
+        if (objectToMove2 == null)
+        {
+            //flash inventory if too many items
+            StartCoroutine(GameObject.Find("CamelInventoryBorder").GetComponent<FlashBorder>().FlashBorderRed());
+            return;
+        }
 		//get location of each object
 		int object2Index = camelInventory.IndexOf (objectToMove2);
 		int object1Index = inventory.IndexOf (objectToMove);
@@ -110,6 +117,8 @@ public class InventoryManager : MonoBehaviour
         levelController.SetWeight(currentCamelInventoryWeight);
 
         Debug.Log(levelController.GetWeight());
+
+        MaxWeightText.text = currentCamelInventoryWeight.ToString();
         //TODO: Remove
 		currentInventorySize--;
 		currentCamelInventorySize++;
@@ -146,6 +155,8 @@ public class InventoryManager : MonoBehaviour
         levelController.SetWeight(currentCamelInventoryWeight);
 
         Debug.Log(levelController.GetWeight());
+
+        MaxWeightText.text = currentCamelInventoryWeight.ToString();
         //TODO: remove
         currentInventorySize++;
 		currentCamelInventorySize--;
