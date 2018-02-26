@@ -12,11 +12,13 @@ public class InventoryManager : MonoBehaviour
     public GameObject placeholder;
 
     AudioSource sellItems;
+    AudioSource error;
 
     public int maxWeight;
 	private bool canSwap;
 
     private int currentCamelInventoryWeight;
+    private int numberItemsInCamelInventory;
     private TextMeshProUGUI weightText;
 
     private Moving camelMoving;
@@ -28,7 +30,11 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
 
-        sellItems = GetComponent<AudioSource>();
+        sellItems = GetComponents<AudioSource>()[0];
+        error = GetComponents<AudioSource>()[1];
+
+        numberItemsInCamelInventory = 0;
+
         foreach (GameObject item in inventory)
         {
             Debug.Log(item.name);
@@ -161,8 +167,10 @@ public class InventoryManager : MonoBehaviour
         }
 
         if (shouldReturn)
+        {
+            error.Play();
             return;
-
+        }
         //get location of each object
         int object2Index = camelInventory.IndexOf (objectToMove2);
 		int object1Index = inventory.IndexOf (objectToMove);
@@ -180,6 +188,13 @@ public class InventoryManager : MonoBehaviour
         Debug.Log(levelController.GetWeight());
 
         weightText.text = currentCamelInventoryWeight.ToString();
+
+        //Item added now camel can go to market
+        if(numberItemsInCamelInventory == 0)
+        {
+            camelMoving.SetClickable(true);
+        }
+        numberItemsInCamelInventory++;
     }
 
     // Removes item from camel and puts it in inventory
@@ -216,6 +231,13 @@ public class InventoryManager : MonoBehaviour
 
         weightText.text = currentCamelInventoryWeight.ToString();
 
+        //can't send camel to market with no items
+        if(numberItemsInCamelInventory == 1)
+        {
+            camelMoving.SetClickable(false);
+        }
+
+        numberItemsInCamelInventory--;
     }
 
 
@@ -236,10 +258,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-	public void SellItems ()
+	public IEnumerator SellItems ()
 	{
        
 		int totalItemValue = 0;
+
+        sellItems.Play();
         //loop through all items in camels inventory
         for (int i = 0; i < camelInventory.Count - 1; i++)
         {
@@ -266,7 +290,6 @@ public class InventoryManager : MonoBehaviour
 
         }
 
-        sellItems.Play();
 
         Debug.Log(totalItemValue);
         levelController.AddCoins(totalItemValue);
@@ -279,6 +302,10 @@ public class InventoryManager : MonoBehaviour
 
         currentCamelInventoryWeight = 0;
         levelController.SetWeight(0);   //set the weight to 0
+        numberItemsInCamelInventory = 0;
+
+        yield return new WaitForSeconds(1f);
+
         camelMoving.StartMoving();     //let camel move back
     }
 

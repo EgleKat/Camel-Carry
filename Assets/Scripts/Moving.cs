@@ -35,7 +35,7 @@ public class Moving : MonoBehaviour {
         inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
 
-        clickable = true;
+        clickable = false;
         stopped = true;
         firstTime = false;
         animator.SetBool("isWalking", false);
@@ -107,7 +107,7 @@ public class Moving : MonoBehaviour {
             //Change the moving direction
             direction = Vector3.left;
             //Send a message to inventory_manager
-            inventoryManager.SellItems();
+            StartCoroutine(inventoryManager.SellItems());
         }
         //if camel hits beginning marker
         else

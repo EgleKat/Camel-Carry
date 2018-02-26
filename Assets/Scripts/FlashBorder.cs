@@ -18,7 +18,7 @@ public class FlashBorder : MonoBehaviour {
     public IEnumerator FlashBorderRed()
     {
         int i = 0;
-        while (i < 3)
+        while (i < 2)
         {
             //show, pause, hide, pause ...etc
             GetComponent<CanvasRenderer>().SetAlpha(1f);
