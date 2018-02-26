@@ -12,42 +12,81 @@ public class InventoryManager : MonoBehaviour
     public GameObject placeholder;
 
     public int maxWeight;
-
-	private int currentInventorySize;
-	private int currentCamelInventorySize;
 	private bool canSwap;
 
     private int currentCamelInventoryWeight;
-    private TextMeshProUGUI MaxWeightText;
+    private TextMeshProUGUI weightText;
 
-	private Moving camelMoving;
+    private Moving camelMoving;
     LevelController levelController;
 
     //TODO: Coin audio when selling
-    //TODO: Add hot items, give cold and hot items attributes, cant be put next to each other
 
     // Use this for initialization
     void Start()
     {
-        //TODO: set price and weight based on item
         foreach (GameObject item in inventory)
         {
             Debug.Log(item.name);
+            ItemValues itemVals = item.GetComponent<ItemValues>();
 
-            ItemValues iv = item.GetComponent<ItemValues>();
-               
-            iv.SetPrice(500);
-            iv.SetWeight(10);
+            //customisable item and weight for each item
+            //items are organised into types: normal, cold and hot
+            switch (item.name)
+            {
+                case "Umbrella":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Normal";
+                case "Sword":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Normal";
+                case "Flip-Flops":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Normal";
+                case "Mysterious-bottle":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Normal";
+                case "Normal":
+                    itemVals.SetType(ItemValues.ItemType.Normal);
+                    break;
+
+                case "Ice Cream":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Cold";
+                case "Ice Cube":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Cold";
+                case "Cold":
+                    itemVals.SetType(ItemValues.ItemType.Cold);
+                    break;
+
+                case "Microwave":
+                    itemVals.SetPrice(500);
+                    itemVals.SetWeight(10);
+                    goto case "Hot";
+                case "Hot":
+                    itemVals.SetType(ItemValues.ItemType.Hot);
+                    break;
+
+                default:
+                    Debug.Log("Item Not Recognised");
+                    break;
+            }
 
         }
-        MaxWeightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
-        MaxWeightText.text = "0";
+
+        weightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
+        weightText.text = "0";
 
         currentCamelInventoryWeight = 0;
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
 
-		currentCamelInventorySize = 0;
-		currentInventorySize = inventory.Count;
         levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
         levelController.SetWeight(0);   //set the weight to 0
 		canSwap = true;
@@ -68,7 +107,6 @@ public class InventoryManager : MonoBehaviour
 		b.transform.position = tempPosition;
 
 	}
-    //TODO - whenever an item is added/removed from the box -call levelController.setWeight()
     
     // Removes item from inventory and puts it in camel
     private void MoveItemToCamel (GameObject objectToMove)
@@ -76,15 +114,6 @@ public class InventoryManager : MonoBehaviour
 		GameObject objectToMove2 = null;
 
         int objectWeight = objectToMove.GetComponent<ItemValues>().GetWeight();
-
-        //if object would break the camels back don't allow adding
-        Debug.Log(currentCamelInventoryWeight + " " + objectWeight);
-        if (currentCamelInventoryWeight + objectWeight > maxWeight)
-        {
-            //flash max weight red
-            StartCoroutine(GameObject.Find("MaxWeightBorder").GetComponent<FlashBorder>().FlashBorderRed());
-            return;
-        }
 
         Debug.Log("under weight");
 		//find placeholder to swap with
@@ -95,15 +124,43 @@ public class InventoryManager : MonoBehaviour
 			}
 		}
 
-        //if no placeholder dont add item
-        if (objectToMove2 == null)
+
+        bool isObjectToMoveCompatable = true;
+        foreach (GameObject item in camelInventory)
         {
-            //flash inventory if too many items
-            StartCoroutine(GameObject.Find("CamelInventoryBorder").GetComponent<FlashBorder>().FlashBorderRed());
-            return;
+            if (item.tag == "placeholder")
+                continue;
+
+            if (ItemsCompatable(objectToMove, item))
+                continue;
+
+            isObjectToMoveCompatable = false;
+            break;
+
         }
-		//get location of each object
-		int object2Index = camelInventory.IndexOf (objectToMove2);
+
+        bool shouldReturn = false;
+        //if no placeholder or item is uncompatable dont add item
+        if (objectToMove2 == null || !isObjectToMoveCompatable)
+        {
+            //flash inventory if too many items or items not compatible
+            StartCoroutine(GameObject.Find("CamelInventoryBorder").GetComponent<FlashBorder>().FlashBorderRed());
+            shouldReturn = true;
+        }
+        //if object would break the camels back don't allow adding
+        Debug.Log(currentCamelInventoryWeight + " " + objectWeight);
+        if (currentCamelInventoryWeight + objectWeight > maxWeight)
+        {
+            //flash max weight red
+            StartCoroutine(GameObject.Find("MaxWeightBorder").GetComponent<FlashBorder>().FlashBorderRed());
+            shouldReturn = true;
+        }
+
+        if (shouldReturn)
+            return;
+
+        //get location of each object
+        int object2Index = camelInventory.IndexOf (objectToMove2);
 		int object1Index = inventory.IndexOf (objectToMove);
 
         //swap inventories of items
@@ -118,10 +175,7 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log(levelController.GetWeight());
 
-        MaxWeightText.text = currentCamelInventoryWeight.ToString();
-        //TODO: Remove
-		currentInventorySize--;
-		currentCamelInventorySize++;
+        weightText.text = currentCamelInventoryWeight.ToString();
     }
 
     // Removes item from camel and puts it in inventory
@@ -156,10 +210,7 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log(levelController.GetWeight());
 
-        MaxWeightText.text = currentCamelInventoryWeight.ToString();
-        //TODO: remove
-        currentInventorySize++;
-		currentCamelInventorySize--;
+        weightText.text = currentCamelInventoryWeight.ToString();
 
     }
 
@@ -222,6 +273,35 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight = 0;
         levelController.SetWeight(0);   //set the weight to 0
         camelMoving.StartMoving();     //let camel move back
+    }
+
+    // Check if items can be put in inventory with each other
+    private bool ItemsCompatable(GameObject item1, GameObject item2)
+    {
+        // Get items type
+        ItemValues.ItemType item1Type = item1.GetComponent<ItemValues>().GetItemType();
+        ItemValues.ItemType item2Type = item2.GetComponent<ItemValues>().GetItemType();
+
+        // Compare items
+        switch (item1Type)
+        {
+            // Normal items go with anything
+            case ItemValues.ItemType.Normal:
+                return true;
+            // Cold items can't go with hot items but can go with other items
+            case ItemValues.ItemType.Cold:
+                if (item2Type == ItemValues.ItemType.Hot)
+                    return false;
+                return true;
+            // Vice Versa
+            case ItemValues.ItemType.Hot:
+                if (item2Type == ItemValues.ItemType.Cold)
+                    return false;
+                return true;
+            default:
+                Debug.Log("Item of invalid type");
+                return false;
+        }
     }
 
 	public void ToggleSwapping ()

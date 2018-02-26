@@ -10,11 +10,18 @@ public class ItemValues : MonoBehaviour {
 
     private int priceVal;
     private int weightVal;
+    public enum ItemType {Normal, Hot, Cold};
+
+    private ItemType thisItemType;
+
+    public int itemMultiplier;
 
     // Use this for initialization
     void Awake () {
         price = transform.Find ("Price").gameObject.GetComponent<TextMeshProUGUI> ();
         weight = transform.Find ("Weight").gameObject.GetComponent <TextMeshProUGUI> ();
+
+        
 	}
 	
 	// Update is called once per frame
@@ -24,8 +31,8 @@ public class ItemValues : MonoBehaviour {
 
     public void SetPrice (int priceToSet)
     {
-        priceVal = priceToSet;
-        price.text = priceToSet.ToString ();
+        priceVal = priceToSet * itemMultiplier;
+        price.text = priceVal.ToString ();
         Debug.Log("Set Price");
 
     }
@@ -37,8 +44,8 @@ public class ItemValues : MonoBehaviour {
 
     public void SetWeight(int weightToSet)
     {
-        weightVal = weightToSet;
-        weight.text = weightToSet.ToString();
+        weightVal = weightToSet * itemMultiplier;
+        weight.text = weightVal.ToString();
         Debug.Log("Set Weight");
 
     }
@@ -46,5 +53,15 @@ public class ItemValues : MonoBehaviour {
     public int GetWeight()
     {
         return weightVal;
+    }
+
+    public void SetType(ItemType type)
+    {
+        thisItemType = type;
+    }
+
+    public ItemType GetItemType()
+    {
+        return thisItemType;
     }
 }
