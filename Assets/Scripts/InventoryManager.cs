@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject placeholder;
 
+    AudioSource sellItems;
+
     public int maxWeight;
 	private bool canSwap;
 
@@ -25,6 +27,8 @@ public class InventoryManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        sellItems = GetComponent<AudioSource>();
         foreach (GameObject item in inventory)
         {
             Debug.Log(item.name);
@@ -259,7 +263,10 @@ public class InventoryManager : MonoBehaviour
 
             //make item invisible and uninteractable
             item.SetActive(false);
+
         }
+
+        sellItems.Play();
 
         Debug.Log(totalItemValue);
         levelController.AddCoins(totalItemValue);
