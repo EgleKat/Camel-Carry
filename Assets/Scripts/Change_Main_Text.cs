@@ -16,10 +16,15 @@ public class Change_Main_Text : MonoBehaviour {
 
     private List<Vector3> secondaryPosition = new List<Vector3>();
 
+    InventoryManager controlClicking;
+
     int textDisplayCount = 0;
 
     // Use this for initialization
     void Start () {
+        //Used for enabling and disabling item swapping
+        controlClicking = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
+
         textMain.Add("\nFinally! You're here!\n\n" +
             "Ohohoh you're in trouble my friend.\n\n" +
             "The Sultan increased the taxes and if you don't pay them you will go to jail!");
@@ -68,12 +73,14 @@ public class Change_Main_Text : MonoBehaviour {
             mainPanel.SetActive(false);
             secondaryPanel.SetActive(true);
             textDisplayCount = 0;
+            controlClicking.SetSwap(true);
             ChangeSecondaryText();
         }
         else
         {
             mainText.text = textMain[textDisplayCount];
             textDisplayCount++;
+            controlClicking.SetSwap(false);
         }
     }
 
@@ -84,6 +91,9 @@ public class Change_Main_Text : MonoBehaviour {
         if (textDisplayCount == textSecondary.Count)
         {
             secondaryPanel.SetActive(false);
+            controlClicking.SetTutorialFinished(true);
+            controlClicking.SetCamelClickable(true);
+
         }else
         {
             secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];

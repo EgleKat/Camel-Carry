@@ -22,16 +22,21 @@ public class InventoryManager : MonoBehaviour
     private TextMeshProUGUI weightText;
 
     private Moving camelMoving;
-    LevelController levelController;
+    private LevelController levelController;
+    private Change_Main_Text tutorialScript;
 
-    //TODO: Coin audio when selling
+    //for tutorial
+    private bool firstItemMoved;
+    private bool tutorialFinished;
 
     // Use this for initialization
     void Start()
     {
-
+        firstItemMoved = false;
+        tutorialFinished = false;
         sellItems = GetComponents<AudioSource>()[0];
         error = GetComponents<AudioSource>()[1];
+        tutorialScript = GameObject.Find("Tutorial").GetComponent<Change_Main_Text>();
 
         numberItemsInCamelInventory = 0;
 
@@ -42,6 +47,7 @@ public class InventoryManager : MonoBehaviour
 
             //customisable item and weight for each item
             //items are organised into types: normal, cold and hot
+            //for multiple items change multiplier
             switch (item.name)
             {
                 case "Umbrella":
@@ -123,6 +129,12 @@ public class InventoryManager : MonoBehaviour
     {
 		GameObject objectToMove2 = null;
 
+        //pass first part of tutorial
+        if (!firstItemMoved)
+            tutorialScript.ChangeSecondaryText();
+
+        firstItemMoved = true;
+
         int objectWeight = objectToMove.GetComponent<ItemValues>().GetWeight();
 
         Debug.Log("under weight");
@@ -189,8 +201,8 @@ public class InventoryManager : MonoBehaviour
 
         weightText.text = currentCamelInventoryWeight.ToString();
 
-        //Item added, now camel can go to market
-        if(numberItemsInCamelInventory == 0)
+        //Item added, now camel can go to market as long as tutorial is finished
+        if(numberItemsInCamelInventory == 0 && tutorialFinished)
         {
             camelMoving.SetClickable(true);
         }
@@ -350,5 +362,15 @@ public class InventoryManager : MonoBehaviour
     public int GetMaxWeight()
     {
         return maxWeight;
+    }
+
+    public void SetTutorialFinished(bool tutfinish)
+    {
+        tutorialFinished = tutfinish;
+    }
+
+    public void SetCamelClickable(bool click)
+    {
+        camelMoving.SetClickable(click);
     }
 }
