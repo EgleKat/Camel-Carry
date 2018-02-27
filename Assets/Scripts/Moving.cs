@@ -143,12 +143,11 @@ public class Moving : MonoBehaviour {
     private void changeSpeed()
     {
         int weight = levelController.GetWeight();
-        Debug.Log(weight);
         if (weight == 0)
         {
             speedMultiplier = 100;
         }
-        speedMultiplier -= weight*2;
+        speedMultiplier -= weight*3;
 
         //Speed can only be 0 or greater than 0
         if (speedMultiplier < 0)
