@@ -14,6 +14,9 @@ public class Tutorial : MonoBehaviour {
     public GameObject mainPanel;
     public GameObject secondaryPanel;
 
+    public GameObject secondaryButton;
+    private Boolean buttonActive;
+
     private List<Vector3> secondaryPosition = new List<Vector3>();
 
     InventoryManager controlClicking;
@@ -38,7 +41,7 @@ public class Tutorial : MonoBehaviour {
         textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
         textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
         textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
-        textSecondary.Add("And remember - you need to reach the goal before the market closes at the end of the day!\nGood Luck!");
+        textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
 
 
 
@@ -51,7 +54,7 @@ public class Tutorial : MonoBehaviour {
 
 
 
-
+        buttonActive = false;
 
 
         mainPanel.SetActive(true);
@@ -81,6 +84,7 @@ public class Tutorial : MonoBehaviour {
             mainText.text = textMain[textDisplayCount];
             textDisplayCount++;
             controlClicking.SetSwap(false);
+           
         }
     }
 
@@ -99,6 +103,8 @@ public class Tutorial : MonoBehaviour {
             secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
             secondaryText.text = textSecondary[textDisplayCount];
             textDisplayCount++;
+            secondaryButton.SetActive(buttonActive);
+            buttonActive = true;
 
         }
     }

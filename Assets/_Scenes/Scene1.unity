@@ -14526,6 +14526,7 @@ MonoBehaviour:
   secondaryText: {fileID: 1741509068}
   mainPanel: {fileID: 1259143915}
   secondaryPanel: {fileID: 801925162}
+  secondaryButton: {fileID: 2073202461}
 --- !u!4 &2141497968
 Transform:
   m_ObjectHideFlags: 0
