@@ -30,7 +30,7 @@ public class Change_Main_Text : MonoBehaviour {
 
         textSecondary.Add("These are all the items you have to deliver to me. Click on the item to place it in the chest.");
         textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
-        textSecondary.Add("This is the chest's inventory.\nThe items here will be delivered on the next journey to the market. Below is the chest's weight. (Remember, the limit is 20)");
+        textSecondary.Add("This is the chest's inventory.\nThe items here will be delivered on the next journey to the market. Below is the chest's weight");
         textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
         textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
         textSecondary.Add("And remember - you need to reach the goal before the market closes at the end of the day!\nGood Luck!");
