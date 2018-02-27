@@ -18,12 +18,14 @@ public class Moving : MonoBehaviour {
     AudioSource standingAudio;
     private Transform chestTransform;
     private InventoryManager inventoryManager;
+    private Tutorial tutorial;
     //int secondsToFade = 6;
     
 
 
     // Use this for initialization
     void Start () {
+        tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
         camelAudio = GetComponents<AudioSource>()[1];
         walkingAudio = GetComponents<AudioSource>()[0];
         standingAudio = GetComponents<AudioSource>()[2];
@@ -51,6 +53,7 @@ public class Moving : MonoBehaviour {
             walkingAudio.Play();
             if (!firstTime)
             {
+                tutorial.ChangeSecondaryText();
                 firstTime = true;
                 levelController.StartTimer();
                 Debug.Log("hello");

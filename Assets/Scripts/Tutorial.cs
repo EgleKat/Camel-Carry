@@ -40,8 +40,8 @@ public class Tutorial : MonoBehaviour {
        // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
         textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
         textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
-        textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
         textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
+        textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
 
 
 
@@ -90,13 +90,21 @@ public class Tutorial : MonoBehaviour {
 
     public void ChangeSecondaryText()
     {
+        //final text asking to click camel
+        if(textDisplayCount == textSecondary.Count - 1)
+        {
+            controlClicking.SetTutorialFinished(true);
+
+            if(!(controlClicking.GetNumItemsInCamelInventory() == 0)){
+                controlClicking.SetCamelClickable(true);
+            }
+            buttonActive = false;
+        }
 
         Debug.Log(textDisplayCount + "  " + textSecondary.Count);
         if (textDisplayCount == textSecondary.Count)
         {
             secondaryPanel.SetActive(false);
-            controlClicking.SetTutorialFinished(true);
-            controlClicking.SetCamelClickable(true);
 
         }else
         {

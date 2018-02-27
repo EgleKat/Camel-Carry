@@ -153,7 +153,7 @@ public class InventoryManager : MonoBehaviour
             if (item.tag == "placeholder")
                 continue;
 
-            if (ItemsCompatable(objectToMove, item))
+            if (ItemsCompatable(objectToMove, item)) 
                 continue;
 
             isObjectToMoveCompatable = false;
@@ -372,5 +372,10 @@ public class InventoryManager : MonoBehaviour
     public void SetCamelClickable(bool click)
     {
         camelMoving.SetClickable(click);
+    }
+
+    public int GetNumItemsInCamelInventory()
+    {
+        return numberItemsInCamelInventory;
     }
 }
