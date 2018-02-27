@@ -60,11 +60,11 @@ public class InventoryManager : MonoBehaviour
                     goto case "Normal";
                 case "Flip-Flops":
                     itemVals.SetPrice(10);
-                    itemVals.SetWeight(15);
+                    itemVals.SetWeight(2);
                     goto case "Normal";
                 case "Mysterious-bottle":
                     itemVals.SetPrice(30);
-                    itemVals.SetWeight(10);
+                    itemVals.SetWeight(1);
                     goto case "Normal";
                 case "Normal":
                     itemVals.SetType(ItemValues.ItemType.Normal);
@@ -72,11 +72,11 @@ public class InventoryManager : MonoBehaviour
 
                 case "Ice Cream":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(10);
+                    itemVals.SetWeight(6);
                     goto case "Cold";
                 case "Ice Cube":
                     itemVals.SetPrice(30);
-                    itemVals.SetWeight(10);
+                    itemVals.SetWeight(5);
                     goto case "Cold";
                 case "Cold":
                     itemVals.SetType(ItemValues.ItemType.Cold);
