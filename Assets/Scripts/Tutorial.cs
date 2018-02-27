@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class Change_Main_Text : MonoBehaviour {
+public class Tutorial : MonoBehaviour {
 
     private List<string> textMain = new List<string>();
     private List<string> textSecondary = new List<string>();

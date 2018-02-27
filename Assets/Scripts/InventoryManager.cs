@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour
 
     private Moving camelMoving;
     private LevelController levelController;
-    private Change_Main_Text tutorialScript;
+    private Tutorial tutorialScript;
 
     //for tutorial
     private bool firstItemMoved;
@@ -36,7 +36,7 @@ public class InventoryManager : MonoBehaviour
         tutorialFinished = false;
         sellItems = GetComponents<AudioSource>()[0];
         error = GetComponents<AudioSource>()[1];
-        tutorialScript = GameObject.Find("Tutorial").GetComponent<Change_Main_Text>();
+        tutorialScript = GameObject.Find("Tutorial").GetComponent<Tutorial>();
 
         numberItemsInCamelInventory = 0;
 
