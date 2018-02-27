@@ -28,4 +28,14 @@ public class FlashBorder : MonoBehaviour {
             i++;
         }
     }
+
+    public void Highlight()
+    {
+        GetComponent<CanvasRenderer>().SetAlpha(1);
+    }
+
+    public void Hide()
+    {
+        GetComponent<CanvasRenderer>().SetAlpha(0);
+    }
 }

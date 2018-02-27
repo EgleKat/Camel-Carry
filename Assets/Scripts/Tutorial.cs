@@ -88,32 +88,55 @@ public class Tutorial : MonoBehaviour {
         }
     }
 
+    //find border scripts
+    public FlashBorder GetBorder(string name)
+    {
+        return GameObject.Find(name).GetComponent<FlashBorder>();
+    }
+
     public void ChangeSecondaryText()
     {
-        //final text asking to click camel
-        if(textDisplayCount == textSecondary.Count - 1)
-        {
-            controlClicking.SetTutorialFinished(true);
 
-            if(!(controlClicking.GetNumItemsInCamelInventory() == 0)){
-                controlClicking.SetCamelClickable(true);
-            }
-            buttonActive = false;
+        switch (textDisplayCount)
+        {
+            //click item in inventory
+            case 0:
+                GetBorder("InventoryBorder").Highlight();
+                break;
+            //careful of weight
+            case 1:
+                GetBorder("InventoryBorder").Hide();
+                GetBorder("MaxWeightBorder").Highlight();
+                break;
+            //time and money
+            case 2:
+                GetBorder("MaxWeightBorder").Hide();
+                GetBorder("InfoOutline").Highlight();
+                break;
+            case 3:
+                GetBorder("InfoOutline").Hide();
+                break;
+            //click the camel and go!!!
+            case 4:
+                controlClicking.SetTutorialFinished(true);
+
+                if (!(controlClicking.GetNumItemsInCamelInventory() == 0))
+                {
+                    controlClicking.SetCamelClickable(true);
+                }
+
+                buttonActive = false;
+                break;
+            //tutorial over
+            default:
+                secondaryPanel.SetActive(false);
+                return;
         }
 
-        Debug.Log(textDisplayCount + "  " + textSecondary.Count);
-        if (textDisplayCount == textSecondary.Count)
-        {
-            secondaryPanel.SetActive(false);
-
-        }else
-        {
-            secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
-            secondaryText.text = textSecondary[textDisplayCount];
-            textDisplayCount++;
-            secondaryButton.SetActive(buttonActive);
-            buttonActive = true;
-
-        }
+        secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
+        secondaryText.text = textSecondary[textDisplayCount];
+        textDisplayCount++;
+        secondaryButton.SetActive(buttonActive);
+        buttonActive = true;
     }
 }
