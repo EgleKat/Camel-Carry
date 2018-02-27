@@ -52,7 +52,7 @@ public class LevelController : MonoBehaviour {
            
             if (t > levelLimitTime - 6)
             {
-                timerText.faceColor = Color.red;
+                timerText.color = Color.red;
             }
 
             //Adjust time text
