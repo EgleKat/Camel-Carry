@@ -51,19 +51,19 @@ public class InventoryManager : MonoBehaviour
             switch (item.name)
             {
                 case "Umbrella":
-                    itemVals.SetPrice(500);
-                    itemVals.SetWeight(10);
+                    itemVals.SetPrice(30);
+                    itemVals.SetWeight(5);
                     goto case "Normal";
                 case "Sword":
-                    itemVals.SetPrice(500);
+                    itemVals.SetPrice(100);
                     itemVals.SetWeight(10);
                     goto case "Normal";
                 case "Flip-Flops":
-                    itemVals.SetPrice(500);
-                    itemVals.SetWeight(10);
+                    itemVals.SetPrice(10);
+                    itemVals.SetWeight(15);
                     goto case "Normal";
                 case "Mysterious-bottle":
-                    itemVals.SetPrice(500);
+                    itemVals.SetPrice(30);
                     itemVals.SetWeight(10);
                     goto case "Normal";
                 case "Normal":
@@ -71,11 +71,11 @@ public class InventoryManager : MonoBehaviour
                     break;
 
                 case "Ice Cream":
-                    itemVals.SetPrice(500);
+                    itemVals.SetPrice(50);
                     itemVals.SetWeight(10);
                     goto case "Cold";
                 case "Ice Cube":
-                    itemVals.SetPrice(500);
+                    itemVals.SetPrice(30);
                     itemVals.SetWeight(10);
                     goto case "Cold";
                 case "Cold":
@@ -83,7 +83,7 @@ public class InventoryManager : MonoBehaviour
                     break;
 
                 case "Microwave":
-                    itemVals.SetPrice(500);
+                    itemVals.SetPrice(50);
                     itemVals.SetWeight(10);
                     goto case "Hot";
                 case "Hot":
