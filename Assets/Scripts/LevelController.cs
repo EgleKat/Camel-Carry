@@ -20,12 +20,17 @@ public class LevelController : MonoBehaviour {
     private GameObject winMessage;
     private GameObject looseMessage;
     private InventoryManager inventoryManager;
+    private AudioSource tickAudio;
+    private float time;
+    private bool onFiveSecs=false;
 
     // Use this for initialization
     void Start()
     {
         levelStart = false;
         setCoinDisplay();
+
+        tickAudio = timerText.GetComponent<AudioSource>();
 
         inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         camel = GameObject.FindGameObjectWithTag("Camel");
@@ -42,27 +47,30 @@ public class LevelController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Update timer
         if (levelStart)
         {
-            float t = Time.time - levelStartTime;
             
-           
-            if (t > levelLimitTime - 6)
+            float t = Time.time - levelStartTime;
+            time = levelLimitTime - t;
+
+
+            if (time < 6 && !onFiveSecs)
             {
-                timerText.faceColor = Color.red;
+                onFiveSecs = true;
+                timerText.color = Color.red;
+                InvokeRepeating("playTickSound", 0, 1);
             }
 
             //Adjust time text
-            float time = levelLimitTime - t;
                 string minutes = Mathf.Floor(time / 60f).ToString("00");
                 string seconds = Mathf.Floor(time % 60f).ToString("00");
                            
                 timerText.text = minutes + ":" + seconds;
 
-            if (t >= levelLimitTime)
+            if (time <=0)
             {
                 levelStart = false;
                 LevelFinished();
@@ -73,6 +81,16 @@ public class LevelController : MonoBehaviour {
     
     }
 
+    private void playTickSound()
+    {
+
+        if(time > 0)
+        {
+            tickAudio.Stop();
+            tickAudio.Play();
+        }
+
+    }
     public void StartTimer()
     {
         levelStart = true;
