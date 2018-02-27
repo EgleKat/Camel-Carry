@@ -277,7 +277,7 @@ public class InventoryManager : MonoBehaviour
 
         sellItems.Play();
         //loop through all items in camels inventory
-        for (int i = 0; i < camelInventory.Count - 1; i++)
+        for (int i = 0; i < camelInventory.Count; i++)
         {
             GameObject item = camelInventory[i];
 
