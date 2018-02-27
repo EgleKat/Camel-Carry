@@ -25,12 +25,12 @@ public class Change_Main_Text : MonoBehaviour {
             "The Sultan increased the taxes and if you don't pay them you will go to jail!");
         textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
             "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
-        textMain.Add("\nThe camel can carry up to 20 units of items and the heavier the load - the slower she goes");
+        textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
 
 
-        textSecondary.Add("These are all the items you have to deliver to me. Click on the item to place it in the chest.");
-        textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
-        textSecondary.Add("This is the chest's inventory.\nThe items here will be delivered on the next journey to the market. Below is the chest's weight");
+        textSecondary.Add("Load the camel's chest by clicking on an item.");
+       // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
+        textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
         textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
         textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
         textSecondary.Add("And remember - you need to reach the goal before the market closes at the end of the day!\nGood Luck!");
@@ -38,7 +38,7 @@ public class Change_Main_Text : MonoBehaviour {
 
 
         secondaryPosition.Add(new Vector3(-340, -108, -50));
-        secondaryPosition.Add(new Vector3(-340, -108, -50));
+      //  secondaryPosition.Add(new Vector3(-340, -108, -50));
         secondaryPosition.Add(new Vector3(-6, -90, -50));
         secondaryPosition.Add(new Vector3(110, -90, -50));
         secondaryPosition.Add(new Vector3(-75, 55, -50));
