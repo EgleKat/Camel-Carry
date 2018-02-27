@@ -189,7 +189,7 @@ public class InventoryManager : MonoBehaviour
 
         weightText.text = currentCamelInventoryWeight.ToString();
 
-        //Item added now camel can go to market
+        //Item added, now camel can go to market
         if(numberItemsInCamelInventory == 0)
         {
             camelMoving.SetClickable(true);
@@ -303,7 +303,6 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight = 0;
         levelController.SetWeight(0);   //set the weight to 0
         numberItemsInCamelInventory = 0;
-
         yield return new WaitForSeconds(1f);
 
         camelMoving.StartMoving();     //let camel move back

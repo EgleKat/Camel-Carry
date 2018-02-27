@@ -113,7 +113,6 @@ public class Moving : MonoBehaviour {
         else
         {
             //let the user click the camel
-            clickable = true;
 			inventoryManager.ToggleSwapping ();
             walkingAudio.Stop();
             standingAudio.Play();
