@@ -13,11 +13,13 @@ public class Tutorial : MonoBehaviour {
 
     public GameObject mainPanel;
     public GameObject secondaryPanel;
+    private int level;
 
     public GameObject secondaryButton;
     private Boolean buttonActive;
 
     private List<Vector3> secondaryPosition = new List<Vector3>();
+    private LevelController findlevel;
 
     InventoryManager controlClicking;
 
@@ -25,43 +27,47 @@ public class Tutorial : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        findlevel = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
+        level = findlevel.GetLevel();
+        
         //Used for enabling and disabling item swapping
         controlClicking = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
-
-        textMain.Add("\nFinally! You're here!\n\n" +
-            "Ohohoh you're in trouble my friend.\n\n" +
-            "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
-        textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well");
-        //textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
-        //    "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
-        //textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
-
-
-        textSecondary.Add("Load the camel's chest by clicking on an item.");
-       // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
-        //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
-        //textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
-        //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
-        textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
+        if (level == 1)
+        {
+            textMain.Add("\nFinally! You're here!\n\n" +
+                "Ohohoh you're in trouble my friend.\n\n" +
+                "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
+            textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well");
+            //textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
+            //    "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
+            //textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
 
 
-
-        secondaryPosition.Add(new Vector3(-340, -108, -50));
-      //  secondaryPosition.Add(new Vector3(-340, -108, -50));
-        //secondaryPosition.Add(new Vector3(-6, -90, -50));
-        //secondaryPosition.Add(new Vector3(110, -90, -50));
-        //secondaryPosition.Add(new Vector3(-75, 55, -50));
-        secondaryPosition.Add(new Vector3(-75,55,-50));
+            textSecondary.Add("Load the camel's chest by clicking on an item.");
+            // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
+            //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
+            //textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
+            //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
+            textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
 
 
 
-        buttonActive = false;
+            secondaryPosition.Add(new Vector3(-340, -108, -50));
+            //  secondaryPosition.Add(new Vector3(-340, -108, -50));
+            //secondaryPosition.Add(new Vector3(-6, -90, -50));
+            //secondaryPosition.Add(new Vector3(110, -90, -50));
+            //secondaryPosition.Add(new Vector3(-75, 55, -50));
+            secondaryPosition.Add(new Vector3(-75, 55, -50));
 
 
-        mainPanel.SetActive(true);
-        secondaryPanel.SetActive(false);
-        ChangeMainText();
 
+            buttonActive = false;
+
+
+            mainPanel.SetActive(true);
+            secondaryPanel.SetActive(false);
+            ChangeMainText();
+        }
     }
 	
 	// Update is called once per frame
@@ -72,20 +78,23 @@ public class Tutorial : MonoBehaviour {
 
     public void ChangeMainText()
     {
-        if (textDisplayCount == textMain.Count)
+        if (level == 1)
         {
-            mainPanel.SetActive(false);
-            secondaryPanel.SetActive(true);
-            textDisplayCount = 0;
-            controlClicking.SetSwap(true);
-            ChangeSecondaryText();
-        }
-        else
-        {
-            mainText.text = textMain[textDisplayCount];
-            textDisplayCount++;
-            controlClicking.SetSwap(false);
-           
+            if (textDisplayCount == textMain.Count)
+            {
+                mainPanel.SetActive(false);
+                secondaryPanel.SetActive(true);
+                textDisplayCount = 0;
+                controlClicking.SetSwap(true);
+                ChangeSecondaryText();
+            }
+            else
+            {
+                mainText.text = textMain[textDisplayCount];
+                textDisplayCount++;
+                controlClicking.SetSwap(false);
+
+            }
         }
     }
 
@@ -97,36 +106,45 @@ public class Tutorial : MonoBehaviour {
 
     public void ChangeSecondaryText()
     {
-
-        switch (textDisplayCount)
+        switch (level)
         {
-            //click item in inventory
-            case 0:
-                GetBorder("InventoryBorder").Highlight();
-                break;
-            //careful of weight
             case 1:
-                GetBorder("InventoryBorder").Hide();
-            //click the camel and go!!!
-                controlClicking.SetTutorialFinished(true);
-
-                if (!(controlClicking.GetNumItemsInCamelInventory() == 0))
+                switch (textDisplayCount)
                 {
-                    controlClicking.SetCamelClickable(true);
+                    //click item in inventory
+                    case 0:
+                        GetBorder("InventoryBorder").Highlight();
+                        break;
+                    //careful of weight
+                    case 1:
+                        GetBorder("InventoryBorder").Hide();
+                        //click the camel and go!!!
+                        controlClicking.SetTutorialFinished(true);
+
+                        if (!(controlClicking.GetNumItemsInCamelInventory() == 0))
+                        {
+                            controlClicking.SetCamelClickable(true);
+                        }
+
+                        buttonActive = false;
+                        break;
+                    //tutorial over
+                    default:
+                        secondaryPanel.SetActive(false);
+                        return;
                 }
 
-                buttonActive = false;
+                secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
+                secondaryText.text = textSecondary[textDisplayCount];
+                textDisplayCount++;
+                secondaryButton.SetActive(buttonActive);
+                buttonActive = true;
                 break;
-            //tutorial over
-            default:
-                secondaryPanel.SetActive(false);
-                return;
-        }
+            case 2:
+                controlClicking.SetCamelClickable(true);
+                break;
 
-        secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
-        secondaryText.text = textSecondary[textDisplayCount];
-        textDisplayCount++;
-        secondaryButton.SetActive(buttonActive);
-        buttonActive = true;
+        }
+        
     }
 }

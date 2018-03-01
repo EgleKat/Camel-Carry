@@ -24,6 +24,8 @@ public class LevelController : MonoBehaviour {
     private float time;
     private bool onFiveSecs=false;
 
+    public int level;
+
     // Use this for initialization
     void Start()
     {
@@ -150,6 +152,16 @@ public class LevelController : MonoBehaviour {
     {
         winMessage.SetActive(true);
 
+    }
+
+    public void SetLevel(int lvl)
+    {
+        level = lvl;
+    }
+
+    public int GetLevel()
+    {
+        return level;
     }
 }
 

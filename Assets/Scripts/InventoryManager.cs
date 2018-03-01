@@ -313,6 +313,7 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log("Items = 0");
             levelController.LevelFinished();
+            yield break;
         }
 
         currentCamelInventoryWeight = 0;
