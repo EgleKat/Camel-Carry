@@ -30,26 +30,27 @@ public class Tutorial : MonoBehaviour {
 
         textMain.Add("\nFinally! You're here!\n\n" +
             "Ohohoh you're in trouble my friend.\n\n" +
-            "The Sultan increased the taxes and if you don't pay them you will go to jail!");
-        textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
-            "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
-        textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
+            "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
+        textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well");
+        //textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
+        //    "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
+        //textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
 
 
         textSecondary.Add("Load the camel's chest by clicking on an item.");
        // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
-        textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
-        textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
-        textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
-        textSecondary.Add("Click on the camel when you're ready to deliver the goods. The day will start and you will be able to plan out your next shipment whilst the camel's travelling.");
+        //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
+        //textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
+        //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
+        textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
 
 
 
         secondaryPosition.Add(new Vector3(-340, -108, -50));
       //  secondaryPosition.Add(new Vector3(-340, -108, -50));
-        secondaryPosition.Add(new Vector3(-6, -90, -50));
-        secondaryPosition.Add(new Vector3(110, -90, -50));
-        secondaryPosition.Add(new Vector3(-75, 55, -50));
+        //secondaryPosition.Add(new Vector3(-6, -90, -50));
+        //secondaryPosition.Add(new Vector3(110, -90, -50));
+        //secondaryPosition.Add(new Vector3(-75, 55, -50));
         secondaryPosition.Add(new Vector3(-75,55,-50));
 
 
@@ -106,18 +107,7 @@ public class Tutorial : MonoBehaviour {
             //careful of weight
             case 1:
                 GetBorder("InventoryBorder").Hide();
-                GetBorder("MaxWeightBorder").Highlight();
-                break;
-            //time and money
-            case 2:
-                GetBorder("MaxWeightBorder").Hide();
-                GetBorder("InfoOutline").Highlight();
-                break;
-            case 3:
-                GetBorder("InfoOutline").Hide();
-                break;
             //click the camel and go!!!
-            case 4:
                 controlClicking.SetTutorialFinished(true);
 
                 if (!(controlClicking.GetNumItemsInCamelInventory() == 0))

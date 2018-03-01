@@ -33,7 +33,6 @@ public class ItemValues : MonoBehaviour {
     {
         priceVal = priceToSet * itemMultiplier;
         price.text = priceVal.ToString ();
-        Debug.Log("Set Price");
 
     }
 
@@ -46,7 +45,6 @@ public class ItemValues : MonoBehaviour {
     {
         weightVal = weightToSet * itemMultiplier;
         weight.text = weightVal.ToString();
-        Debug.Log("Set Weight");
 
     }
 

@@ -56,8 +56,6 @@ public class Moving : MonoBehaviour {
                 tutorial.ChangeSecondaryText();
                 firstTime = true;
                 levelController.StartTimer();
-                Debug.Log("hello");
-                Debug.Log("Direction: " + direction);
                // StartMoving();
             }
 
@@ -126,6 +124,7 @@ public class Moving : MonoBehaviour {
 
     public void StopMoving(bool animateChest)
     {
+        Debug.Log("Stopped Moving");
         stopped = true;
         if(animateChest) {
             chestAnimator.SetAnimation(stopped);
@@ -156,7 +155,6 @@ public class Moving : MonoBehaviour {
         if (speedMultiplier < 0)
             speedMultiplier = 0;
 
-        Debug.Log("speedmult" + speedMultiplier);
         animator.speed = speedMultiplier * 0.01f;
     }
 

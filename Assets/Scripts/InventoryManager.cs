@@ -15,11 +15,13 @@ public class InventoryManager : MonoBehaviour
     AudioSource error;
 
     public int maxWeight;
-	private bool canSwap;
+    public int numItemsInInventory;
+    private bool canSwap;
 
     private int currentCamelInventoryWeight;
     private int numberItemsInCamelInventory;
-    private TextMeshProUGUI weightText;
+    //COMMENTED OUT FOR LEVEL1
+    //private TextMeshProUGUI weightText;
 
     private Moving camelMoving;
     private LevelController levelController;
@@ -42,7 +44,6 @@ public class InventoryManager : MonoBehaviour
 
         foreach (GameObject item in inventory)
         {
-            Debug.Log(item.name);
             ItemValues itemVals = item.GetComponent<ItemValues>();
 
             //customisable item and weight for each item
@@ -97,8 +98,9 @@ public class InventoryManager : MonoBehaviour
 
         }
 
-        weightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
-        weightText.text = "0";
+        //COMMENTED OUT FOR LEVEL1
+        //weightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
+        //weightText.text = "0";
 
         currentCamelInventoryWeight = 0;
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
@@ -137,7 +139,6 @@ public class InventoryManager : MonoBehaviour
 
         int objectWeight = objectToMove.GetComponent<ItemValues>().GetWeight();
 
-        Debug.Log("under weight");
 		//find placeholder to swap with
 		foreach (GameObject item in camelInventory) {
 			if (item.tag == "placeholder") {
@@ -170,7 +171,6 @@ public class InventoryManager : MonoBehaviour
             shouldReturn = true;
         }
         //if object would break the camels back don't allow adding
-        Debug.Log(currentCamelInventoryWeight + " " + objectWeight);
         if (currentCamelInventoryWeight + objectWeight > maxWeight)
         {
             //flash max weight red
@@ -197,9 +197,9 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight += objectToMove.GetComponent<ItemValues>().GetWeight();
         levelController.SetWeight(currentCamelInventoryWeight);
 
-        Debug.Log(levelController.GetWeight());
+        //COMMENTED OUT FOR LEVEL1
 
-        weightText.text = currentCamelInventoryWeight.ToString();
+        //weightText.text = currentCamelInventoryWeight.ToString();
 
         //Item added, now camel can go to market as long as tutorial is finished
         if(numberItemsInCamelInventory == 0 && tutorialFinished)
@@ -207,6 +207,7 @@ public class InventoryManager : MonoBehaviour
             camelMoving.SetClickable(true);
         }
         numberItemsInCamelInventory++;
+        numItemsInInventory--;
     }
 
     // Removes item from camel and puts it in inventory
@@ -239,9 +240,9 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight -= objectToMove.GetComponent<ItemValues>().GetWeight();
         levelController.SetWeight(currentCamelInventoryWeight);
 
-        Debug.Log(levelController.GetWeight());
 
-        weightText.text = currentCamelInventoryWeight.ToString();
+        //COMMENTED OUT FOR LEVEL1
+        //weightText.text = currentCamelInventoryWeight.ToString();
 
         //can't send camel to market with no items
         if(numberItemsInCamelInventory == 1)
@@ -250,6 +251,8 @@ public class InventoryManager : MonoBehaviour
         }
 
         numberItemsInCamelInventory--;
+        numItemsInInventory++;
+
     }
 
 
@@ -303,12 +306,12 @@ public class InventoryManager : MonoBehaviour
         }
 
 
-        Debug.Log(totalItemValue);
         levelController.AddCoins(totalItemValue);
 
         //finish level
-        if(inventory.Count == 0)
+        if(numItemsInInventory == 0)
         {
+            Debug.Log("Items = 0");
             levelController.LevelFinished();
         }
 
