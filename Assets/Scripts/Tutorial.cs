@@ -46,7 +46,7 @@ public class Tutorial : MonoBehaviour {
             textSecondary.Add("Load the camel's chest by clicking on an item.");
             // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
             //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
-            //textSecondary.Add("Here's the time until the market closes and your money goal for the day.");
+            textSecondary.Add("This is your money goal for the day.");
             //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
             textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
 
@@ -55,7 +55,7 @@ public class Tutorial : MonoBehaviour {
             secondaryPosition.Add(new Vector3(-340, -108, -50));
             //  secondaryPosition.Add(new Vector3(-340, -108, -50));
             //secondaryPosition.Add(new Vector3(-6, -90, -50));
-            //secondaryPosition.Add(new Vector3(110, -90, -50));
+            secondaryPosition.Add(new Vector3(110, -90, -50));
             //secondaryPosition.Add(new Vector3(-75, 55, -50));
             secondaryPosition.Add(new Vector3(-75, 55, -50));
 
@@ -115,9 +115,13 @@ public class Tutorial : MonoBehaviour {
                     case 0:
                         GetBorder("InventoryBorder").Highlight();
                         break;
-                    //careful of weight
+                    //money
                     case 1:
                         GetBorder("InventoryBorder").Hide();
+                        GetBorder("InfoOutline").Highlight();
+                        break;
+                    case 2:
+                        GetBorder("InfoOutline").Hide();
                         //click the camel and go!!!
                         controlClicking.SetTutorialFinished(true);
 

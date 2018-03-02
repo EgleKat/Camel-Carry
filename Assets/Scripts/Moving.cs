@@ -71,6 +71,10 @@ public class Moving : MonoBehaviour {
             StartMoving();
             direction = Vector3.right;
         }
+        if(!clickable && inventoryManager.GetNumItemsInCamelInventory() == 0)
+        {
+            StartCoroutine(tutorial.GetBorder("InventoryBorder").FlashBorderRed());
+        }
     }
 
  
