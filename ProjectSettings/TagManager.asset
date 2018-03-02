@@ -13,6 +13,7 @@ TagManager:
   - level_notification
   - win_message
   - loose_message
+  - theTimer
   layers:
   - Default
   - TransparentFX

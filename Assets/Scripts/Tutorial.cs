@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class Tutorial : MonoBehaviour {
 
     public TextMeshProUGUI mainText;
     public TextMeshProUGUI secondaryText;
+
+    public UserControlls userControls;
 
     public GameObject mainPanel;
     public GameObject secondaryPanel;
@@ -29,7 +32,8 @@ public class Tutorial : MonoBehaviour {
     void Start () {
         findlevel = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
         level = findlevel.GetLevel();
-        
+        userControls = GameObject.FindGameObjectWithTag("GameController").GetComponent<UserControlls>();
+
         //Used for enabling and disabling item swapping
         controlClicking = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         if (level == 1)
@@ -52,7 +56,7 @@ public class Tutorial : MonoBehaviour {
 
 
 
-            secondaryPosition.Add(new Vector3(-340, -108, -50));
+            secondaryPosition.Add(new Vector3(-340, -78, -50));
             //  secondaryPosition.Add(new Vector3(-340, -108, -50));
             //secondaryPosition.Add(new Vector3(-6, -90, -50));
             secondaryPosition.Add(new Vector3(110, -90, -50));
@@ -68,13 +72,38 @@ public class Tutorial : MonoBehaviour {
             secondaryPanel.SetActive(false);
             ChangeMainText();
         }
+        if(level == 2)
+        {
+            textSecondary.Add("Click the most expensive item, the yellow number at the top indicates the items price");
+            textSecondary.Add("This is the total weight on the camel, the heavier the weight the slower she goes.");
+            textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
+            textSecondary.Add("This is taking too long, the market will be closed by the time we get there. Press the R key to restart");
+            textSecondary.Add("Click the lightest item, the red number at the bottom indicates the items weight");
+            textSecondary.Add("You know what to do");
+
+            secondaryPosition.Add(new Vector3(-340, -78, -50));
+            secondaryPosition.Add(new Vector3(0, -90, -50));
+            secondaryPosition.Add(new Vector3(-75, 55, -50));
+            secondaryPosition.Add(new Vector3(-75, 55, -50));
+            secondaryPosition.Add(new Vector3(-340, -78, -50));
+            secondaryPosition.Add(new Vector3(-75, 55, -50));
+
+            mainPanel.SetActive(false);
+            secondaryPanel.SetActive(true);
+
+            if (userControls.GetInstructedToRestart() == true)
+            {
+                GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
+                SetTextDisplayCount(4);
+            }
+            ChangeSecondaryText();
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
 
     public void ChangeMainText()
     {
@@ -102,6 +131,20 @@ public class Tutorial : MonoBehaviour {
     public FlashBorder GetBorder(string name)
     {
         return GameObject.Find(name).GetComponent<FlashBorder>();
+    }
+
+    public IEnumerator<WaitForSeconds> TwoHoursLatar()
+    {
+        secondaryPanel.SetActive(false);
+        yield return new WaitForSeconds(6f);
+        secondaryPanel.SetActive(true);
+        buttonActive = false;
+        secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
+        secondaryText.text = textSecondary[textDisplayCount];
+        textDisplayCount++;
+        secondaryButton.SetActive(buttonActive);
+        buttonActive = true;
+        userControls.SetInstructedToRestart(true);
     }
 
     public void ChangeSecondaryText()
@@ -137,18 +180,62 @@ public class Tutorial : MonoBehaviour {
                         secondaryPanel.SetActive(false);
                         return;
                 }
-
-                secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
-                secondaryText.text = textSecondary[textDisplayCount];
-                textDisplayCount++;
-                secondaryButton.SetActive(buttonActive);
-                buttonActive = true;
                 break;
             case 2:
-                controlClicking.SetCamelClickable(true);
+                switch (textDisplayCount)
+                {
+                    //click item in inventory
+                    case 0:
+                        GetBorder("InventoryBorder").Highlight();
+                        break;
+                    case 1:
+                        GetBorder("InventoryBorder").Hide();
+                        GetBorder("MaxWeightBorder").Highlight();
+                        break;
+                    case 2:
+                        GetBorder("MaxWeightBorder").Hide();
+                        controlClicking.SetTutorialFinished(true);
+
+                        if (!(controlClicking.GetNumItemsInCamelInventory() == 0))
+                        {
+                            controlClicking.SetCamelClickable(true);
+                        }
+                        buttonActive = false;
+                        break;
+                    case 3:
+                        StartCoroutine(TwoHoursLatar());
+                        return;
+                    case 4:
+                        buttonActive = false;
+                        break;
+                    case 5:
+                        controlClicking.SetTutorialFinished(true);
+
+                        if (!(controlClicking.GetNumItemsInCamelInventory() == 0))
+                        {
+                            controlClicking.SetCamelClickable(true);
+                        }
+                        buttonActive = false;
+                        break;
+                    //tutorial over
+                    default:
+                        secondaryPanel.SetActive(false);
+                        return;
+                }
                 break;
 
         }
-        
+
+        secondaryPanel.transform.localPosition = secondaryPosition[textDisplayCount];
+        secondaryText.text = textSecondary[textDisplayCount];
+        textDisplayCount++;
+        secondaryButton.SetActive(buttonActive);
+        buttonActive = true;
+
+    }
+
+    public void SetTextDisplayCount(int newDisplayCount)
+    {
+        textDisplayCount = newDisplayCount;
     }
 }

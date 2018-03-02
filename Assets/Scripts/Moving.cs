@@ -49,10 +49,12 @@ public class Moving : MonoBehaviour {
     {
         if (clickable)
         {
+            Debug.Log("clickable");
             standingAudio.Stop();
             walkingAudio.Play();
             if (!firstTime)
             {
+                Debug.Log("First time");
                 tutorial.ChangeSecondaryText();
                 firstTime = true;
                 levelController.StartTimer();
@@ -153,7 +155,7 @@ public class Moving : MonoBehaviour {
         {
             speedMultiplier = 100;
         }
-        speedMultiplier -= weight*3;
+        speedMultiplier -= weight*5;
 
         //Speed can only be 0 or greater than 0
         if (speedMultiplier < 0)

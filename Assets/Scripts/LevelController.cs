@@ -10,12 +10,12 @@ public class LevelController : MonoBehaviour {
 
     private bool levelStart;
     private float levelStartTime;
-    public TextMeshProUGUI timerText;
+    private TextMeshProUGUI timerText;
     public float levelLimitTime;
     private GameObject camel;
     public int coinGoal;
     private int coinCount = 0;
-    public TextMeshProUGUI coinText;
+    private TextMeshProUGUI coinText;
     private int weight;
     private GameObject winMessage;
     private GameObject looseMessage;
@@ -29,11 +29,14 @@ public class LevelController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
+        coinText = GameObject.Find("Nmber of Coins").GetComponent<TextMeshProUGUI>();
         levelStart = false;
         setCoinDisplay();
 
         tickAudio = timerText.GetComponent<AudioSource>();
 
+        
         inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         camel = GameObject.FindGameObjectWithTag("Camel");
         winMessage = GameObject.FindWithTag("win_message");
