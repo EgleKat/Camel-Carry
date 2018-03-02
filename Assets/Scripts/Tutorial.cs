@@ -32,7 +32,7 @@ public class Tutorial : MonoBehaviour {
     void Start () {
         findlevel = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
         level = findlevel.GetLevel();
-        userControls = GameObject.FindGameObjectWithTag("GameController").GetComponent<UserControlls>();
+        userControls = GameObject.Find("UserController").GetComponent<UserControlls>();
 
         //Used for enabling and disabling item swapping
         controlClicking = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();

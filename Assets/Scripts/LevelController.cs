@@ -29,14 +29,17 @@ public class LevelController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
+        if (!(level == 1))
+        {
+            timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
+            tickAudio = timerText.GetComponent<AudioSource>();
+        }
         coinText = GameObject.Find("Nmber of Coins").GetComponent<TextMeshProUGUI>();
         levelStart = false;
         setCoinDisplay();
 
-        tickAudio = timerText.GetComponent<AudioSource>();
 
-        
+
         inventoryManager = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
         camel = GameObject.FindGameObjectWithTag("Camel");
         winMessage = GameObject.FindWithTag("win_message");
@@ -45,45 +48,50 @@ public class LevelController : MonoBehaviour {
         looseMessage = GameObject.FindWithTag("loose_message");
         looseMessage.SetActive(false);
 
-        float t = levelLimitTime;
-        string minutes = Mathf.Floor(t / 60).ToString("00");
-        string seconds = (t % 60).ToString("00");
-        timerText.text = minutes + ":" + seconds;
+        if (!(level == 1))
+        {
+            float t = levelLimitTime;
+            string minutes = Mathf.Floor(t / 60).ToString("00");
+            string seconds = (t % 60).ToString("00");
+            timerText.text = minutes + ":" + seconds;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Update timer
-        if (levelStart)
+        if (!(level == 1))
         {
-            
-            float t = Time.time - levelStartTime;
-            time = levelLimitTime - t;
-
-
-            if (time < 6 && !onFiveSecs)
+            //Update timer
+            if (levelStart)
             {
-                onFiveSecs = true;
-                timerText.color = Color.red;
-                InvokeRepeating("playTickSound", 0, 1);
-            }
 
-            //Adjust time text
+                float t = Time.time - levelStartTime;
+                time = levelLimitTime - t;
+
+
+                if (time < 6 && !onFiveSecs)
+                {
+                    onFiveSecs = true;
+                    timerText.color = Color.red;
+                    InvokeRepeating("playTickSound", 0, 1);
+                }
+
+                //Adjust time text
                 string minutes = Mathf.Floor(time / 60f).ToString("00");
                 string seconds = Mathf.Floor(time % 60f).ToString("00");
-                           
+
                 timerText.text = minutes + ":" + seconds;
 
-            if (time <=0)
-            {
-                levelStart = false;
-                LevelFinished();
-                timerText.text = "00:00";
-                
+                if (time <= 0)
+                {
+                    levelStart = false;
+                    LevelFinished();
+                    timerText.text = "00:00";
+
+                }
             }
         }
-    
     }
 
     private void playTickSound()

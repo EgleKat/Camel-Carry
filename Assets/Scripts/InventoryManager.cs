@@ -59,7 +59,7 @@ public class InventoryManager : MonoBehaviour
                 case "Sword":
                     itemVals.SetPrice(100);
                     itemVals.SetWeight(10);
-                    if(levelController.GetLevel() == 2)
+                    if (levelController.GetLevel() == 2)
                     {
                         itemVals.SetPrice(200);
                         itemVals.SetWeight(18);
@@ -104,8 +104,11 @@ public class InventoryManager : MonoBehaviour
 
         }
 
-        weightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
-        weightText.text = "0";
+        if (!(levelController.GetLevel() == 1))
+        {
+            weightText = GameObject.Find("MaxWeight").GetComponent<TextMeshProUGUI>();
+            weightText.text = "0";
+        }
 
         currentCamelInventoryWeight = 0;
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
@@ -201,7 +204,10 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight += objectToMove.GetComponent<ItemValues>().GetWeight();
         levelController.SetWeight(currentCamelInventoryWeight);
 
-        weightText.text = currentCamelInventoryWeight.ToString();
+        if (!(levelController.GetLevel() == 1))
+        {
+            weightText.text = currentCamelInventoryWeight.ToString();
+        }
 
         //Item added, now camel can go to market as long as tutorial is finished
         if(numberItemsInCamelInventory == 0 && tutorialFinished)
@@ -243,8 +249,10 @@ public class InventoryManager : MonoBehaviour
         levelController.SetWeight(currentCamelInventoryWeight);
 
 
-        
-        weightText.text = currentCamelInventoryWeight.ToString();
+        if (!(levelController.GetLevel() == 1))
+        {
+            weightText.text = currentCamelInventoryWeight.ToString();
+        }
 
         //can't send camel to market with no items
         if(numberItemsInCamelInventory == 1)
