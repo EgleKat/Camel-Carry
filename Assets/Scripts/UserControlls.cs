@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class UserControlls : MonoBehaviour {
 
-    private bool instrutedToRestart;
+    private bool instructedToRestart;
 	// Use this for initialization
 	void Awake () {
-        instrutedToRestart = false;
+        instructedToRestart = false;
         DontDestroyOnLoad(this);
     }
 
@@ -29,11 +29,11 @@ public class UserControlls : MonoBehaviour {
 
     public bool GetInstructedToRestart()
     {
-        return instrutedToRestart;
+        return instructedToRestart;
     }
 
     public void SetInstructedToRestart(bool restart)
     {
-        instrutedToRestart = restart;
+        instructedToRestart = restart;
     }
 }

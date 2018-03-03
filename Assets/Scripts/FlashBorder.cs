@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class FlashBorder : MonoBehaviour {
 
+    private bool isHighlighted;
 	// Use this for initialization
 	void Start () {
         //hide
         GetComponent<CanvasRenderer>().SetAlpha(0);
+        isHighlighted = false;
 	}
 	
 	// Update is called once per frame
@@ -17,6 +19,10 @@ public class FlashBorder : MonoBehaviour {
 
     public IEnumerator FlashBorderRed()
     {
+        if (isHighlighted)
+        {
+            yield break;
+        }
         int i = 0;
         while (i < 2)
         {
@@ -32,10 +38,12 @@ public class FlashBorder : MonoBehaviour {
     public void Highlight()
     {
         GetComponent<CanvasRenderer>().SetAlpha(1);
+        isHighlighted = true;
     }
 
     public void Hide()
     {
         GetComponent<CanvasRenderer>().SetAlpha(0);
+        isHighlighted = false;
     }
 }

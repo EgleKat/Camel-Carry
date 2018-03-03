@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Moving : MonoBehaviour {
 
@@ -47,6 +48,9 @@ public class Moving : MonoBehaviour {
 
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (clickable)
         {
             Debug.Log("clickable");

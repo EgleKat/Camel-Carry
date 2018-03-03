@@ -74,18 +74,18 @@ public class Tutorial : MonoBehaviour {
         }
         if(level == 2)
         {
-            textSecondary.Add("Click the most expensive item, the yellow number at the top indicates the items price");
-            textSecondary.Add("This is the total weight on the camel, the heavier the weight the slower she goes.");
-            textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
+            textSecondary.Add("Every Item has a unique price and weight");
+            textSecondary.Add("Click the most expensive item");
+            textSecondary.Add("This is the total chest weight, the heavier the weight the slower G'Zilla goes.");
+            textSecondary.Add("Send this item to the market");
             textSecondary.Add("This is taking too long, the market will be closed by the time we get there. Press the R key to restart");
-            textSecondary.Add("Click the lightest item, the red number at the bottom indicates the items weight");
-            textSecondary.Add("You know what to do");
+            textSecondary.Add("Come on slacker! You need to pull your own weight now. The taxes won't pay themselves!");
 
+            secondaryPosition.Add(new Vector3(-340, -78, -50));
             secondaryPosition.Add(new Vector3(-340, -78, -50));
             secondaryPosition.Add(new Vector3(0, -90, -50));
             secondaryPosition.Add(new Vector3(-75, 55, -50));
             secondaryPosition.Add(new Vector3(-75, 55, -50));
-            secondaryPosition.Add(new Vector3(-340, -78, -50));
             secondaryPosition.Add(new Vector3(-75, 55, -50));
 
             mainPanel.SetActive(false);
@@ -93,8 +93,9 @@ public class Tutorial : MonoBehaviour {
 
             if (userControls.GetInstructedToRestart() == true)
             {
+
                 GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
-                SetTextDisplayCount(4);
+                SetTextDisplayCount(5);
             }
             ChangeSecondaryText();
         }
@@ -145,6 +146,7 @@ public class Tutorial : MonoBehaviour {
         secondaryButton.SetActive(buttonActive);
         buttonActive = true;
         userControls.SetInstructedToRestart(true);
+        GetBorder("InfoOutline").Highlight();
     }
 
     public void ChangeSecondaryText()
@@ -186,13 +188,17 @@ public class Tutorial : MonoBehaviour {
                 {
                     //click item in inventory
                     case 0:
-                        GetBorder("InventoryBorder").Highlight();
+                        buttonActive = true;
                         break;
                     case 1:
+                        GetBorder("InventoryBorder").Highlight();
+                        buttonActive = false;
+                        break;
+                    case 2:
                         GetBorder("InventoryBorder").Hide();
                         GetBorder("MaxWeightBorder").Highlight();
                         break;
-                    case 2:
+                    case 3:
                         GetBorder("MaxWeightBorder").Hide();
                         controlClicking.SetTutorialFinished(true);
 
@@ -202,12 +208,9 @@ public class Tutorial : MonoBehaviour {
                         }
                         buttonActive = false;
                         break;
-                    case 3:
+                    case 4:
                         StartCoroutine(TwoHoursLatar());
                         return;
-                    case 4:
-                        buttonActive = false;
-                        break;
                     case 5:
                         controlClicking.SetTutorialFinished(true);
 
