@@ -23,6 +23,7 @@ public class LevelController : MonoBehaviour {
     private AudioSource tickAudio;
     private float time;
     private bool onFiveSecs=false;
+    private Slider speedSlider;
 
     public int level;
 
@@ -33,6 +34,10 @@ public class LevelController : MonoBehaviour {
         {
             timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
             tickAudio = timerText.GetComponent<AudioSource>();
+        }else if(!(level == 2))
+        {
+            speedSlider = GameObject.FindGameObjectWithTag("Time_Slider").GetComponent<Slider>();
+
         }
         coinText = GameObject.Find("Nmber of Coins").GetComponent<TextMeshProUGUI>();
         levelStart = false;
@@ -132,6 +137,12 @@ public class LevelController : MonoBehaviour {
     //called either when time is finished or when all the items are sold
     public void LevelFinished()
     {
+        if (!(level == 1) || !(level == 2))
+        {
+            //Turn off speed slider, turn back time to 1
+            speedSlider.value = 1;
+            speedSlider.interactable = false;
+        }
         Moving camelMoving = camel.GetComponent<Moving>();
         //Don't let the user click the camel and stop the camel from moving
         camelMoving.SetClickable(false);
