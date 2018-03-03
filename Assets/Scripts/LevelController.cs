@@ -174,6 +174,16 @@ public class LevelController : MonoBehaviour {
     {
         return level;
     }
+
+    public int GetCoinCount()
+    {
+        return coinCount;
+    }
+
+    public int GetCoinGoal()
+    {
+        return coinGoal;
+    }
 }
 
 

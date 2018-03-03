@@ -319,7 +319,7 @@ public class InventoryManager : MonoBehaviour
         levelController.AddCoins(totalItemValue);
 
         //finish level
-        if(numItemsInInventory == 0)
+        if(numItemsInInventory == 0 || levelController.GetCoinCount() >= levelController.GetCoinGoal())
         {
             Debug.Log("Items = 0");
             levelController.LevelFinished();
