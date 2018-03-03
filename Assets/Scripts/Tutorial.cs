@@ -36,69 +36,76 @@ public class Tutorial : MonoBehaviour {
 
         //Used for enabling and disabling item swapping
         controlClicking = GameObject.FindGameObjectWithTag("inventory_manager").GetComponent<InventoryManager>();
-        if (level == 1)
+        switch (level)
         {
-            textMain.Add("\nFinally! You're here!\n\n" +
-                "Ohohoh you're in trouble my friend.\n\n" +
-                "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
-            textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well");
-            //textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
-            //    "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
-            //textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
+            case 1:
+                textMain.Add("\nFinally! You're here!\n\n" +
+                    "Ohohoh you're in trouble my friend.\n\n" +
+                    "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
+                textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well");
+                //textMain.Add("\nEvery day I will wait at the market for the goods and I will pay you good coin for your delivery services.\n\n" +
+                //    "Your job is to load up my sweet camel G'Zilla efficiently so I receive enough goods and you receive your money.");
+                //textMain.Add("\nThe heavier the load - the slower my ol' G'Zilla goes");
 
 
-            textSecondary.Add("Load the camel's chest by clicking on an item.");
-            // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
-            //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
-            textSecondary.Add("This is your money goal for the day.");
-            //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
-            textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
-
-
-
-            secondaryPosition.Add(new Vector3(-340, -78, -50));
-            //  secondaryPosition.Add(new Vector3(-340, -108, -50));
-            //secondaryPosition.Add(new Vector3(-6, -90, -50));
-            secondaryPosition.Add(new Vector3(110, -90, -50));
-            //secondaryPosition.Add(new Vector3(-75, 55, -50));
-            secondaryPosition.Add(new Vector3(-75, 55, -50));
+                textSecondary.Add("Load the camel's chest by clicking on an item.");
+                // textSecondary.Add("The red number represents the weight of the item and the yellow number - how much money you'll get for it.");
+                //textSecondary.Add("Be careful. If the chest is too heavy, the camel won't move.");
+                textSecondary.Add("This is your money goal for the day.");
+                //textSecondary.Add("And remember - you need to reach the goal before the market closes!\nGood Luck!");
+                textSecondary.Add("Click on the camel when you're ready to deliver the goods.");
 
 
 
-            buttonActive = false;
+                secondaryPosition.Add(new Vector3(-340, -78, -50));
+                //  secondaryPosition.Add(new Vector3(-340, -108, -50));
+                //secondaryPosition.Add(new Vector3(-6, -90, -50));
+                secondaryPosition.Add(new Vector3(110, -90, -50));
+                //secondaryPosition.Add(new Vector3(-75, 55, -50));
+                secondaryPosition.Add(new Vector3(-75, 55, -50));
 
 
-            mainPanel.SetActive(true);
-            secondaryPanel.SetActive(false);
-            ChangeMainText();
+
+                buttonActive = false;
+
+
+                mainPanel.SetActive(true);
+                secondaryPanel.SetActive(false);
+                ChangeMainText();
+                break;
+
+            case 2:
+                textSecondary.Add("Every Item has a unique price and weight");
+                textSecondary.Add("Click the most expensive item");
+                textSecondary.Add("This is the total chest weight, the heavier the weight the slower G'Zilla goes.");
+                textSecondary.Add("Send this item to the market");
+                textSecondary.Add("This is taking too long, the market will be closed by the time we get there. Press the R key to restart");
+                textSecondary.Add("Come on slacker! You need to pull your own weight now. The taxes won't pay themselves!");
+
+                secondaryPosition.Add(new Vector3(-340, -78, -50));
+                secondaryPosition.Add(new Vector3(-340, -78, -50));
+                secondaryPosition.Add(new Vector3(0, -90, -50));
+                secondaryPosition.Add(new Vector3(-75, 55, -50));
+                secondaryPosition.Add(new Vector3(-75, 55, -50));
+                secondaryPosition.Add(new Vector3(-75, 55, -50));
+
+                mainPanel.SetActive(false);
+                secondaryPanel.SetActive(true);
+
+                if (userControls.GetInstructedToRestart() == true)
+                {
+
+                    GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
+                    SetTextDisplayCount(5);
+                }
+                ChangeSecondaryText();
+                break;
+            case 3:
+                textSecondary.Add("It's hot and the market needs cold items, just make sure you don't melt them!");
+                textSecondary.Add("Nevermind, I'll just take away your ability to put hot and cold items together");
+                break;
         }
-        if(level == 2)
-        {
-            textSecondary.Add("Every Item has a unique price and weight");
-            textSecondary.Add("Click the most expensive item");
-            textSecondary.Add("This is the total chest weight, the heavier the weight the slower G'Zilla goes.");
-            textSecondary.Add("Send this item to the market");
-            textSecondary.Add("This is taking too long, the market will be closed by the time we get there. Press the R key to restart");
-            textSecondary.Add("Come on slacker! You need to pull your own weight now. The taxes won't pay themselves!");
 
-            secondaryPosition.Add(new Vector3(-340, -78, -50));
-            secondaryPosition.Add(new Vector3(-340, -78, -50));
-            secondaryPosition.Add(new Vector3(0, -90, -50));
-            secondaryPosition.Add(new Vector3(-75, 55, -50));
-            secondaryPosition.Add(new Vector3(-75, 55, -50));
-            secondaryPosition.Add(new Vector3(-75, 55, -50));
-
-            mainPanel.SetActive(false);
-            secondaryPanel.SetActive(true);
-
-            if (userControls.GetInstructedToRestart() == true)
-            {
-
-                GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
-                SetTextDisplayCount(5);
-            }
-            ChangeSecondaryText();
-        }
     }
 	
 	// Update is called once per frame
