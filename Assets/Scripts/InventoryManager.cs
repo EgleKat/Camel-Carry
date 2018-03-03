@@ -53,8 +53,8 @@ public class InventoryManager : MonoBehaviour
             switch (item.name)
             {
                 case "Umbrella":
-                    itemVals.SetPrice(30);
-                    itemVals.SetWeight(5);
+                    itemVals.SetPrice(20);
+                    itemVals.SetWeight(8);
                     goto case "Normal";
                 case "Sword":
                     itemVals.SetPrice(100);
@@ -79,7 +79,7 @@ public class InventoryManager : MonoBehaviour
 
                 case "Ice Cream":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(6);
+                    itemVals.SetWeight(5);
                     goto case "Cold";
                 case "Ice Cube":
                     itemVals.SetPrice(30);
@@ -91,7 +91,7 @@ public class InventoryManager : MonoBehaviour
 
                 case "Microwave":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(10);
+                    itemVals.SetWeight(12);
                     goto case "Hot";
                 case "Hot":
                     itemVals.SetType(ItemValues.ItemType.Hot);
@@ -139,7 +139,7 @@ public class InventoryManager : MonoBehaviour
 		GameObject objectToMove2 = null;
 
         //pass first part of tutorial
-        if (!firstItemMoved)
+        if (!firstItemMoved && levelController.GetLevel() < 3)
             tutorialScript.ChangeSecondaryText();
 
         firstItemMoved = true;
@@ -206,11 +206,11 @@ public class InventoryManager : MonoBehaviour
 
         if (!(levelController.GetLevel() == 1))
         {
-            weightText.text = currentCamelInventoryWeight.ToString();
+            weightText.text = currentCamelInventoryWeight.ToString() + "/20";
         }
 
         //Item added, now camel can go to market as long as tutorial is finished
-        if(numberItemsInCamelInventory == 0 && tutorialFinished)
+        if(numberItemsInCamelInventory == 0 && tutorialFinished || levelController.GetLevel() > 2)
         {
             camelMoving.SetClickable(true);
         }
@@ -251,7 +251,7 @@ public class InventoryManager : MonoBehaviour
 
         if (!(levelController.GetLevel() == 1))
         {
-            weightText.text = currentCamelInventoryWeight.ToString();
+            weightText.text = currentCamelInventoryWeight.ToString() + "/20";
         }
 
         //can't send camel to market with no items
@@ -329,6 +329,7 @@ public class InventoryManager : MonoBehaviour
         currentCamelInventoryWeight = 0;
         levelController.SetWeight(0);   //set the weight to 0
         numberItemsInCamelInventory = 0;
+        weightText.text = currentCamelInventoryWeight.ToString() + "/20";
         yield return new WaitForSeconds(1f);
 
         camelMoving.StartMoving();     //let camel move back

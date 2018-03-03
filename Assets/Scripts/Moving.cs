@@ -59,7 +59,10 @@ public class Moving : MonoBehaviour {
             if (!firstTime)
             {
                 Debug.Log("First time");
-                tutorial.ChangeSecondaryText();
+                if (levelController.GetLevel() < 3)
+                {
+                    tutorial.ChangeSecondaryText();
+                }
                 firstTime = true;
                 levelController.StartTimer();
                // StartMoving();
