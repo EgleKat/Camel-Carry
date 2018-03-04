@@ -60,6 +60,7 @@ public class LevelController : MonoBehaviour {
             string minutes = Mathf.Floor(t / 60).ToString("00");
             string seconds = (t % 60).ToString("00");
             timerText.text = minutes + ":" + seconds;
+            Debug.Log(timerText.text);
         }
     }
 
