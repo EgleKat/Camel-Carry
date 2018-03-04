@@ -3584,9 +3584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4179baceff49db147a3e6a362cfddab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLimitTime: 45
+  levelLimitTime: 40
   coinGoal: 150
-  level: 3
+  level: 4
 --- !u!4 &365496286
 Transform:
   m_ObjectHideFlags: 0
@@ -7967,7 +7967,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 365496287}
-        m_MethodName: NextScene
+        m_MethodName: LoadIntroScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10069,7 +10069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1259143916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12111,7 +12111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1618121967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12128,7 +12128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 167.99968, y: -144.00006}
+  m_AnchoredPosition: {x: 170, y: -144.00006}
   m_SizeDelta: {x: 171.4, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1618121968
@@ -13631,7 +13631,7 @@ MonoBehaviour:
   m_text: 'Congratulations!
 
 
-    You made it through another day!'
+    You finished the game!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d62a573c923f5cb47b8ff65261033b90, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: d62a573c923f5cb47b8ff65261033b90, type: 2}
@@ -13698,12 +13698,12 @@ MonoBehaviour:
   m_margin: {x: -21.131351, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1901132719}
-    characterCount: 50
+    characterCount: 40
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 7
+    spaceCount: 5
+    wordCount: 5
     linkCount: 0
-    lineCount: 5
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -14625,11 +14625,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -14716,7 +14716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Level
+  m_Text: Main Menu
 --- !u!222 &2032943420
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -109,6 +109,8 @@ public class Tutorial : MonoBehaviour {
 
                 ChangeMainText();
                 break;
+            case 4:
+                break;
         }
 
     }
