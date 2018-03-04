@@ -3585,7 +3585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLimitTime: 40
-  coinGoal: 150
+  coinGoal: 200
   level: 4
 --- !u!4 &365496286
 Transform:
