@@ -26,10 +26,12 @@ public class LevelController : MonoBehaviour {
     private Slider speedSlider;
 
     public int level;
+    private bool finished;
 
     // Use this for initialization
     void Start()
     {
+        finished = false;
         //Enable timer
         if (level > 1)
         {
@@ -69,7 +71,7 @@ public class LevelController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!(level == 1))
+        if (!(level == 1) && finished == false)
         {
             //Update timer
             if (levelStart)
@@ -141,6 +143,7 @@ public class LevelController : MonoBehaviour {
     //called either when time is finished or when all the items are sold
     public void LevelFinished()
     {
+        finished = true;
         if (level > 2)
         {
             //Turn off speed slider, turn back time to 1
