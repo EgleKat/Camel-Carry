@@ -98,6 +98,7 @@ public class Tutorial : MonoBehaviour {
                     GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
                     SetTextDisplayCount(5);
                 }
+                controlClicking.SetSwap(false);
                 ChangeSecondaryText();
                 break;
             case 3:
@@ -218,6 +219,7 @@ public class Tutorial : MonoBehaviour {
                         break;
                     case 1:
                         GetBorder("InventoryBorder").Highlight();
+                        controlClicking.SetSwap(true);
                         buttonActive = false;
                         break;
                     case 2:

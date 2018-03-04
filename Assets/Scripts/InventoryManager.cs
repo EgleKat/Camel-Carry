@@ -114,9 +114,12 @@ public class InventoryManager : MonoBehaviour
 		camelMoving = GameObject.FindGameObjectWithTag ("Camel").GetComponent<Moving> ();
 
         levelController.SetWeight(0);   //set the weight to 0
-		canSwap = true;
     }
 
+    void Awake()
+    {
+        canSwap = true;
+    }
     // Update is called once per frame
     void Update()
     {
