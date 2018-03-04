@@ -39,7 +39,7 @@ public class Tutorial : MonoBehaviour {
         switch (level)
         {
             case 1:
-                textMain.Add("\nFinally! You're here!\n\n" +
+                textMain.Add("Finally! You're here!\n\n" +
                     "Ohohoh you're in trouble my friend.\n\n" +
                     "The Sultan increased the taxes and if you don't pay them daily you will go to jail!");
                 textMain.Add("\nDeliver the goods to me at the market and I will make sure you are paid well.");
