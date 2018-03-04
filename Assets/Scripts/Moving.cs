@@ -175,7 +175,10 @@ public class Moving : MonoBehaviour
         if (weight == 0)
         {
             speedMultiplier = 100;
-        }
+        }else if(weight >=19)
+        {
+            speedMultiplier = 8;
+        }else
         speedMultiplier -= weight * 5;
 
         //Speed can only be 0 or greater than 0
