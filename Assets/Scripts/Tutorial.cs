@@ -98,7 +98,14 @@ public class Tutorial : MonoBehaviour {
                     GameObject.Find("Umbrella").GetComponent<Button>().interactable = true;
                     SetTextDisplayCount(5);
                 }
-                controlClicking.SetSwap(false);
+                if (userControls.GetInstructedToRestart())
+                {
+                    controlClicking.SetSwap(true);
+                }
+                else
+                {
+                    controlClicking.SetSwap(false);
+                }
                 ChangeSecondaryText();
                 break;
             case 3:
