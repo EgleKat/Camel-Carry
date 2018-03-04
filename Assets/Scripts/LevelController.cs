@@ -30,11 +30,13 @@ public class LevelController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        //Enable timer
         if (level > 1)
         {
             timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
             tickAudio = timerText.GetComponent<AudioSource>();
         }
+        //Enable speed slider
         if (level > 2)
         {
             speedSlider = GameObject.FindGameObjectWithTag("Time_Slider").GetComponent<Slider>();
@@ -56,6 +58,7 @@ public class LevelController : MonoBehaviour {
 
         if (!(level == 1))
         {
+
             float t = levelLimitTime;
             string minutes = Mathf.Floor(t / 60).ToString("00");
             string seconds = (t % 60).ToString("00");
