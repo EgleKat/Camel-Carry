@@ -83,7 +83,7 @@ public class InventoryManager : MonoBehaviour
                     goto case "Cold";
                 case "Ice Cube":
                     itemVals.SetPrice(30);
-                    itemVals.SetWeight(5);
+                    itemVals.SetWeight(12);
                     goto case "Cold";
                 case "Cold":
                     itemVals.SetType(ItemValues.ItemType.Cold);
@@ -91,7 +91,7 @@ public class InventoryManager : MonoBehaviour
 
                 case "Microwave":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(12);
+                    itemVals.SetWeight(5);
                     goto case "Hot";
                 case "Hot":
                     itemVals.SetType(ItemValues.ItemType.Hot);
@@ -392,5 +392,10 @@ public class InventoryManager : MonoBehaviour
     public int GetNumItemsInCamelInventory()
     {
         return numberItemsInCamelInventory;
+    }
+
+    public AudioSource GetError()
+    {
+        return error;
     }
 }

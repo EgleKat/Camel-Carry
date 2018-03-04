@@ -83,6 +83,7 @@ public class Moving : MonoBehaviour {
         if(!clickable && inventoryManager.GetNumItemsInCamelInventory() == 0)
         {
             StartCoroutine(tutorial.GetBorder("InventoryBorder").FlashBorderRed());
+            inventoryManager.GetError().Play();
         }
     }
 

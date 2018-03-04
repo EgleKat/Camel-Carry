@@ -30,11 +30,12 @@ public class LevelController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        if (!(level == 1))
+        if (level > 1)
         {
             timerText = GameObject.FindGameObjectWithTag("theTimer").GetComponent<TextMeshProUGUI>();
             tickAudio = timerText.GetComponent<AudioSource>();
-        }else if(level > 2)
+        }
+        if (level > 2)
         {
             speedSlider = GameObject.FindGameObjectWithTag("Time_Slider").GetComponent<Slider>();
 
@@ -195,6 +196,7 @@ public class LevelController : MonoBehaviour {
     {
         return coinGoal;
     }
+
 }
 
 
