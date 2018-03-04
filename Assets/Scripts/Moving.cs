@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Moving : MonoBehaviour {
+public class Moving : MonoBehaviour
+{
 
     private Rigidbody rb;
     public float speedMultiplier;
@@ -21,11 +22,12 @@ public class Moving : MonoBehaviour {
     private InventoryManager inventoryManager;
     private Tutorial tutorial;
     //int secondsToFade = 6;
-    
+
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         tutorial = GameObject.Find("Tutorial").GetComponent<Tutorial>();
         camelAudio = GetComponents<AudioSource>()[1];
         walkingAudio = GetComponents<AudioSource>()[0];
@@ -50,7 +52,11 @@ public class Moving : MonoBehaviour {
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+        CamelBegin();
+    }
 
+    void CamelBegin()
+    {
         if (clickable)
         {
             Debug.Log("clickable");
@@ -65,7 +71,7 @@ public class Moving : MonoBehaviour {
                 }
                 firstTime = true;
                 levelController.StartTimer();
-               // StartMoving();
+                // StartMoving();
             }
 
             //start playing audio from 1 second
@@ -73,39 +79,45 @@ public class Moving : MonoBehaviour {
             camelAudio.Play();
 
             clickable = false;
-            inventoryManager.ToggleSwapping ();
+            inventoryManager.ToggleSwapping();
 
             //start the animation
             animator.SetBool("isWalking", true);
             StartMoving();
             direction = Vector3.right;
         }
-        if(!clickable && inventoryManager.GetNumItemsInCamelInventory() == 0)
+        if (!clickable && inventoryManager.GetNumItemsInCamelInventory() == 0)
         {
             StartCoroutine(tutorial.GetBorder("InventoryBorder").FlashBorderRed());
             inventoryManager.GetError().Play();
         }
     }
 
- 
-
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
 
         if (!clickable && !stopped)
         {
             rb.velocity = direction * Time.deltaTime * speedMultiplier;
         }
-     //   if (walkingAudio.volume < 0.7)
-     //   {
-     //     walkingAudio.volume = walkingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
-     //     standingAudio.volume = standingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
-     //
-     //   }
+        //   if (walkingAudio.volume < 0.7)
+        //   {
+        //     walkingAudio.volume = walkingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
+        //     standingAudio.volume = standingAudio.volume + (Time.deltaTime / (secondsToFade + 1));
+        //
+        //   }
 
 
     }
-
+    private void Update()
+    {
+        //on space, start moving he camel
+        if (Input.GetKeyDown("space"))
+        {
+            CamelBegin();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
 
@@ -114,10 +126,10 @@ public class Moving : MonoBehaviour {
 
         //Rotate the camel and the chest
         rb.rotation = rb.rotation * Quaternion.Euler(0, 180, 0);
-        chestTransform.localRotation = chestTransform.localRotation * Quaternion.Euler(0, 180,0);
+        chestTransform.localRotation = chestTransform.localRotation * Quaternion.Euler(0, 180, 0);
 
         //if camel hits the market
-        if (other.gameObject.name =="Market")
+        if (other.gameObject.name == "Market")
         {
             //Change the moving direction
             direction = Vector3.left;
@@ -128,10 +140,10 @@ public class Moving : MonoBehaviour {
         else
         {
             //let the user click the camel
-			inventoryManager.ToggleSwapping ();
+            inventoryManager.ToggleSwapping();
             walkingAudio.Stop();
             standingAudio.Play();
-       		
+
         }
 
     }
@@ -140,7 +152,8 @@ public class Moving : MonoBehaviour {
     {
         Debug.Log("Stopped Moving");
         stopped = true;
-        if(animateChest) {
+        if (animateChest)
+        {
             chestAnimator.SetAnimation(stopped);
         }
         rb.velocity = Vector3.zero;
@@ -163,7 +176,7 @@ public class Moving : MonoBehaviour {
         {
             speedMultiplier = 100;
         }
-        speedMultiplier -= weight*5;
+        speedMultiplier -= weight * 5;
 
         //Speed can only be 0 or greater than 0
         if (speedMultiplier < 0)

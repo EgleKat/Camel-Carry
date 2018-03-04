@@ -78,7 +78,7 @@ public class Tutorial : MonoBehaviour {
                 textSecondary.Add("Every Item has a unique price and weight.");
                 textSecondary.Add("Click the most expensive item.");
                 textSecondary.Add("This is the total chest weight, the heavier the weight the slower G'Zilla goes.");
-                textSecondary.Add("Send this item to the market.");
+                textSecondary.Add("Try pressing 'Space' to send this item to the market.");
                 textSecondary.Add("This is taking too long, the market will be closed by the time we get there. Press the R key to restart.");
                 textSecondary.Add("Come on slacker! You need to pull your own weight now. The taxes won't pay themselves!");
 
