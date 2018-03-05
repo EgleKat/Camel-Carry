@@ -22,6 +22,7 @@ public class LevelController : MonoBehaviour
     private GameObject looseMessage;
     private InventoryManager inventoryManager;
     private AudioSource tickAudio;
+    private UserControlls userControlls;
     private float time;
     private bool onFiveSecs = false;
     private bool backOnFiveSecs = true;
@@ -35,6 +36,7 @@ public class LevelController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        userControlls = GameObject.Find("UserController").GetComponent<UserControlls>();
         finished = false;
         timeSpentStanding = 0;
         //Enable timer
@@ -170,6 +172,8 @@ public class LevelController : MonoBehaviour
         {
             DisplayLooseMessage();
         }
+        userControlls.SetInstructedToRestart(false);
+        
         if (level > 2)
         {
             //Turn off speed slider, turn back time to 1
