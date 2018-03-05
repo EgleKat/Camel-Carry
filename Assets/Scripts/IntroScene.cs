@@ -28,4 +28,10 @@ public class IntroScene : MonoBehaviour {
     {
         SceneManager.LoadScene("Scene_Intro");
     }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+
+    }
 }
