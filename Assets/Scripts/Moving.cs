@@ -59,6 +59,7 @@ public class Moving : MonoBehaviour
     {
         if (clickable)
         {
+            Time.timeScale = 1;
             Debug.Log("clickable");
             standingAudio.Stop();
             walkingAudio.Play();
@@ -140,6 +141,7 @@ public class Moving : MonoBehaviour
         else
         {
             //let the user click the camel
+            Time.timeScale = 0;
             inventoryManager.ToggleSwapping();
             walkingAudio.Stop();
             standingAudio.Play();
