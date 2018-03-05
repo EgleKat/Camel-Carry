@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class LevelController : MonoBehaviour {
+public class LevelController : MonoBehaviour
+{
 
     private bool levelStart;
     private float levelStartTime;
@@ -22,16 +23,19 @@ public class LevelController : MonoBehaviour {
     private InventoryManager inventoryManager;
     private AudioSource tickAudio;
     private float time;
-    private bool onFiveSecs=false;
+    private bool onFiveSecs = false;
     private Slider speedSlider;
 
     public int level;
     private bool finished;
+    public bool stopTime;
+    private float timeSpentStanding;
 
     // Use this for initialization
     void Start()
     {
         finished = false;
+        timeSpentStanding = 0;
         //Enable timer
         if (level > 1)
         {
@@ -74,10 +78,10 @@ public class LevelController : MonoBehaviour {
         if (!(level == 1) && finished == false)
         {
             //Update timer
-            if (levelStart)
+            if (levelStart && !stopTime)
             {
 
-                float t = Time.time - levelStartTime;
+                float t = Time.time - timeSpentStanding - levelStartTime;
                 time = levelLimitTime - t;
 
 
@@ -102,13 +106,18 @@ public class LevelController : MonoBehaviour {
 
                 }
             }
+            //Count how much time has passed in every frame the camel's been standing
+            else if (stopTime)
+            {
+                timeSpentStanding += Time.deltaTime;
+            }
         }
     }
 
     private void playTickSound()
     {
 
-        if(time > 0)
+        if (time > 0)
         {
             tickAudio.Stop();
             tickAudio.Play();
@@ -133,7 +142,7 @@ public class LevelController : MonoBehaviour {
     }
 
     public void SetWeight(int weight)
-    { 
+    {
         this.weight = weight;
     }
     public int GetWeight()
@@ -173,7 +182,7 @@ public class LevelController : MonoBehaviour {
     private void DisplayLooseMessage()
     {
         looseMessage.SetActive(true);
-        
+
     }
 
     private void DisplayWinMessage()
