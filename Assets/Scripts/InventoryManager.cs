@@ -105,11 +105,11 @@ public class InventoryManager : MonoBehaviour
 
                 case "Microwave":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(7);
+                    itemVals.SetWeight(9);
                     goto case "Hot";
                 case "Torch":
                     itemVals.SetPrice(30);
-                    itemVals.SetWeight(5);
+                    itemVals.SetWeight(7);
                     goto case "Hot";
                 case "Hot":
                     itemVals.SetType(ItemValues.ItemType.Hot);

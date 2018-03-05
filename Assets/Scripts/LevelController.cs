@@ -144,6 +144,15 @@ public class LevelController : MonoBehaviour {
     public void LevelFinished()
     {
         finished = true;
+        //check if coin goal is met
+        if (coinCount >= coinGoal)
+        {
+            DisplayWinMessage();
+        }
+        else
+        {
+            DisplayLooseMessage();
+        }
         if (level > 2)
         {
             //Turn off speed slider, turn back time to 1
@@ -158,16 +167,6 @@ public class LevelController : MonoBehaviour {
 
         //Inventory is uninteractable when level finished
         inventoryManager.SetSwap(false);
-
-        //check if coin goal is met
-        if (coinCount>=coinGoal)
-        {
-            DisplayWinMessage();
-        }
-        else
-        {
-            DisplayLooseMessage();
-        }
 
     }
 
