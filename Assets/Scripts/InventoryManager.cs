@@ -57,7 +57,7 @@ public class InventoryManager : MonoBehaviour
                     itemVals.SetWeight(8);
                     if(levelController.GetLevel() == 4)
                     {
-                        itemVals.SetWeight(3);
+                        itemVals.SetWeight(4);
                     }
                     goto case "Normal";
                 case "Sword":
@@ -96,6 +96,7 @@ public class InventoryManager : MonoBehaviour
                     if(levelController.GetLevel() == 4)
                     {
                         itemVals.SetWeight(10);
+                        itemVals.SetPrice(50);
                     }
                     goto case "Cold";
                 case "Cold":
@@ -104,11 +105,11 @@ public class InventoryManager : MonoBehaviour
 
                 case "Microwave":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(6);
+                    itemVals.SetWeight(7);
                     goto case "Hot";
                 case "Torch":
                     itemVals.SetPrice(30);
-                    itemVals.SetWeight(4);
+                    itemVals.SetWeight(5);
                     goto case "Hot";
                 case "Hot":
                     itemVals.SetType(ItemValues.ItemType.Hot);
