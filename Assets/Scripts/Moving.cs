@@ -64,7 +64,6 @@ public class Moving : MonoBehaviour
             walkingAudio.Play();
             if (!firstTime)
             {
-                Debug.Log("First time");
                 if (levelController.GetLevel() < 3)
                 {
                     tutorial.ChangeSecondaryText();
@@ -151,7 +150,6 @@ public class Moving : MonoBehaviour
 
     public void StopMoving(bool animateChest)
     {
-        Debug.Log("Stopped Moving");
         stopped = true;
         if (animateChest)
         {

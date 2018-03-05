@@ -24,6 +24,7 @@ public class LevelController : MonoBehaviour
     private AudioSource tickAudio;
     private float time;
     private bool onFiveSecs = false;
+    private bool backOnFiveSecs = true;
     private Slider speedSlider;
 
     public int level;
@@ -88,6 +89,7 @@ public class LevelController : MonoBehaviour
                 if (time < 6 && !onFiveSecs)
                 {
                     onFiveSecs = true;
+                    backOnFiveSecs = true;
                     timerText.color = Color.red;
                     InvokeRepeating("playTickSound", 0, 1);
                 }
@@ -110,6 +112,12 @@ public class LevelController : MonoBehaviour
             else if (stopTime)
             {
                 timeSpentStanding += Time.deltaTime;
+                if (backOnFiveSecs)
+                {
+                    CancelInvoke();
+                    onFiveSecs = false;
+                    backOnFiveSecs = false;
+                }
             }
         }
     }
@@ -173,6 +181,7 @@ public class LevelController : MonoBehaviour
         camelMoving.SetClickable(false);
         camelMoving.StopMoving(false);
         camelMoving.TurnAllMusicOff();
+        CancelInvoke();
 
         //Inventory is uninteractable when level finished
         inventoryManager.SetSwap(false);

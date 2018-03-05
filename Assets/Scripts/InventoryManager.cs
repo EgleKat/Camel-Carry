@@ -105,7 +105,11 @@ public class InventoryManager : MonoBehaviour
 
                 case "Microwave":
                     itemVals.SetPrice(50);
-                    itemVals.SetWeight(9);
+                    itemVals.SetWeight(6);
+                    if(levelController.GetLevel() == 4)
+                    {
+                        itemVals.SetWeight(9);
+                    }
                     goto case "Hot";
                 case "Torch":
                     itemVals.SetPrice(30);
@@ -342,7 +346,6 @@ public class InventoryManager : MonoBehaviour
         //finish level
         if(numItemsInInventory == 0 || levelController.GetCoinCount() >= levelController.GetCoinGoal())
         {
-            Debug.Log("Items = 0");
             levelController.LevelFinished();
             yield break;
         }

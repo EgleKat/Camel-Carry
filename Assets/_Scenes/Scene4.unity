@@ -3737,9 +3737,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4179baceff49db147a3e6a362cfddab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLimitTime: 45
+  levelLimitTime: 41
   coinGoal: 200
   level: 4
+  stopTime: 0
 --- !u!4 &365496286
 Transform:
   m_ObjectHideFlags: 0
